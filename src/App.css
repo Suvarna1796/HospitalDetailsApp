@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+select {
+  background: #DFDFDF !important;
+  color:#111111 !important;
+  font-size: 16px !important;
+  /* border: 1px solid #666666 !important; */
+}
+.SelectLabel{
+  color: #111111;
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+.tab1 {
+  border: 3px solid #BCA231 !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+}
+
+.tab2  {
+  border: 3px solid #BCA231 !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+}
+
+.TabIndicator {
+  /* background-color: #1E2F50 !important; */
+}

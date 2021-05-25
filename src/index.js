@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PublicDashboard1 from './components/public/publicDashboard1.js';
+import PublicDashboard2 from './components/public/publicDashboard2.js';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <div>
+      <Route exact path="/" component={PublicDashboard1} />
+      <Route exact path="/PublicDashboard1" component={PublicDashboard1} />
+
+      <Route exact path="/publicDashboard2" component={PublicDashboard2} />
+    </div>
+  </Router>,
   document.getElementById('root')
 );
 
