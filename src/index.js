@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import PublicDashboard1 from './components/public/publicDashboard1.js';
 import PublicDashboard2 from './components/public/publicDashboard2.js';
+import PublicDashboard3 from './components/public/publicDashboard3.js';
+
 
 ReactDOM.render(
   <Router>
@@ -15,6 +17,8 @@ ReactDOM.render(
       <Route exact path="/PublicDashboard1" component={PublicDashboard1} />
 
       <Route exact path="/publicDashboard2" component={PublicDashboard2} />
+      <Route exact path="/publicDashboard3" component={PublicDashboard3} />
+
     </div>
   </Router>,
   document.getElementById('root')

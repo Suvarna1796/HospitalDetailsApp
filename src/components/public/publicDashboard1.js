@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
-import NativeSelect from '@material-ui/core/NativeSelect';
+// import NativeSelect from '@material-ui/core/NativeSelect';
 import '../../App.css';
 
 
@@ -12,12 +12,11 @@ class PublicDashboard1 extends React.Component {
 
     render() {
         return (
-            <Grid container spacing={3}>
-                <Grid item xs>
+            <Grid container >
+                <Grid item xs={4}>
                 </Grid>
                 <Grid item xs={5}>
 
-                    {/* <FormControl > */}
                     {/* <label className="SelectLabel" className="SelectLabel">Enter your Country</label>
                     <NativeSelect fullWidth={true} >
                         <option value={10}>Ten</option>
