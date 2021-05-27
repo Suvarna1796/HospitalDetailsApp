@@ -1,27 +1,39 @@
-/* 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
+.MuiToolbar-dense {
+  min-height: 67px !important;
+  background-color :#091D42 !important;
+}
+.AppBody {
+  padding-top: 3% !important;
+  width: 100%;
+}
 
 /* NativeSelect{
   background: #DFDFDF !important;
   color:#111111 !important;
   font-size: 16px !important;
 } */
-table{
-  font-size: 14px;
 
+.material-table {
+  font-size:14px !important;
+  cursor: pointer; 
+  font-weight: 200;
+  border-collapse: collapse !important;
+  border-collapse: separate !important;
+  border-spacing: 0 16px !important;
 }
-table th{
- font-weight:bold;
+.material-table__row{
+  background-color: #E5E5E5;
+  padding: 1rem;
 }
+.material-table__row:hover { 
+  background: #FBEA9D !important;
+}
+
+.material-table__cell {
+  padding: 1.5em !important;
+  /* position: relative; */
+}
+
 .MuiTableRow-root .material-table__row th{
 background-color: blue !important;
 }

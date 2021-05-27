@@ -5,15 +5,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import '../../../App.css';
 
-
-export default class TableComponent extends PureComponent {
-   
+class TableComponent extends PureComponent {
     state = {
         selected: [],
         page: 0,
-        rowsPerPage: 5,
+        rowsPerPage: 10,
     };
 
     handleChangePage = (event, page) => {
@@ -25,36 +25,42 @@ export default class TableComponent extends PureComponent {
     };
 
     render() {
+        var props = this.props;
+        const style_view = props.onViewDetail != undefined ? {} : { display: 'none' };
+        const style_share = props.onShareDetail != undefined ? {} : { display: 'none' };
         const {
             rowsPerPage, page
         } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.cols.length - (page * rowsPerPage));
-        console.log(this, "1111111111111111");
+        console.log(this, "this in table component");
 
         return (
             <Col md={12} lg={12}>
 
                 <div className="material-table__wrap">
                     <Table className="material-table">
-                        {this.props.rows.map(row => (
-                            <TableCell
-                                key={row.id}>
-                                {row.label}
-                            </TableCell>
-                        ), this)}
+                        <TableHead>
+                            <TableRow>
+                                {this.props.rows.map(row => (
+                                    <TableCell
+                                        key={row.id}>
+                                        {row.label}
+                                    </TableCell>
+                                ), this)}
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
                             {this.props.cols
                                 .slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage)
                                 .map((d) => {
                                     return (
-                                        <TableRow style={{ color: "blue !important" }}
+                                        <TableRow hover
                                             className="material-table__row"
                                             tabIndex={-1}
                                             key={d.id}
                                         >
 
-                                            <TableCell style={{ color: "blue !important" }}
-                                                className="material-table__cell"
+                                            <TableCell className="material-table__cell"
                                                 component="th"
                                                 scope="row"
                                                 padding="none"
@@ -63,8 +69,19 @@ export default class TableComponent extends PureComponent {
                                             </TableCell>
                                             <TableCell className="material-table__cell" >{d.address}</TableCell>
                                             <TableCell className="material-table__cell" >{d.hospitalType}</TableCell>
-                                            <TableCell className="material-table__cell" >{d.viewDetails}</TableCell>
-                                            <TableCell className="material-table__cell" >{d.icon}</TableCell>
+                                            <TableCell>
+                                                <a data-toggle="tooltip" onClick={() => props.onViewDetail(d)} title="Share" className="p-2" style={{ color: '#111111' }} >
+                                                    <u> ViewDetails</u>
+                                                </a>
+                                            </TableCell>
+                                            <TableCell>
+                                                <a data-toggle="tooltip" title="Share" className="p-2"  >
+                                                    <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(d)} />
+                                                    {/* <img src="./images/view.png" alt="View" style={{ cursor: 'pointer', width: 25, marginRight: 10 }} /> */}
+
+                                                </a>
+                                            </TableCell>
+                                            {/* <br /> */}
                                         </TableRow>
                                     );
                                 })}
@@ -86,10 +103,11 @@ export default class TableComponent extends PureComponent {
                     nextIconButtonProps={{ 'aria-label': 'Next Page' }}
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    rowsPerPageOptions={[5, 10, 15]}
+                    rowsPerPageOptions={[]}
                 />
 
             </Col>
         );
     }
 }
+export default TableComponent
