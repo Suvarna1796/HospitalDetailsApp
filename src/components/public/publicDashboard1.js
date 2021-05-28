@@ -32,7 +32,7 @@ class PublicDashboard1 extends React.Component {
                 <Grid container >
                     <Grid item xs={4}>
                     </Grid>
-                    </Grid>
+                </Grid>
                 <Grid container className="AppBody" >
                     <Grid item xs={4}>
                     </Grid>
@@ -45,7 +45,7 @@ class PublicDashboard1 extends React.Component {
                         <option value={30}>Thirty</option>
                     </NativeSelect> */}
                         <label className="SelectLabel" >Enter your Country</label>
-                        <select className="form-control" id="publicStateSelection" name="publicCountrySelection" >
+                        <select className="form-control" id="publicCountrySelection" name="publicCountrySelection" >
                             <option>India</option>
                             <option>USA</option>
                             <option>UK</option>
@@ -54,7 +54,7 @@ class PublicDashboard1 extends React.Component {
                         </select>
                         <br />
                         <label className="SelectLabel">Enter your State</label>
-                        <select className="form-control" id="publicStateSelection">
+                        <select className="form-control" id="publicStateSelection" name="publicStateSelection">
                             <option>Karnataka</option>
                             <option>Andhra Pradesh</option>
                             <option>Maharastra</option>
@@ -63,7 +63,7 @@ class PublicDashboard1 extends React.Component {
                         </select>
                         <br />
                         <label className="SelectLabel" >Enter your District</label>
-                        <select className="form-control" id="publicDistrictSelection">
+                        <select className="form-control" id="publicDistrictSelection" name="publicDistrictSelection">
                             <option>Banglore</option>
                             <option>Manglore</option>
                             <option>Ballari </option>
@@ -72,7 +72,7 @@ class PublicDashboard1 extends React.Component {
                         </select>
                         <br />
                         <label className="SelectLabel">Enter your Area</label>
-                        <select className="form-control" id="publicAreaSelection">
+                        <select className="form-control" id="publicAreaSelection" name="publicAreaSelection">
                             <option>Yeswanthpur</option>
                             <option>Jayanagar</option>
                             <option>Uttarahalli </option>
@@ -81,7 +81,7 @@ class PublicDashboard1 extends React.Component {
                         </select>
                         <br />
                         <label className="SelectLabel">Enter your Ward/Sector/Landmark</label>
-                        <select className="form-control" id="publicAreaSelection">
+                        <select className="form-control" id="publicWardSelection" name="publicWardSelection">
                             <option>Sector 6 </option>
                             <option>Sector 1</option>
                             <option>Sector 5 </option>

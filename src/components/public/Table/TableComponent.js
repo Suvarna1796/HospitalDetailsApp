@@ -9,11 +9,15 @@ import TableHead from '@material-ui/core/TableHead';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import '../../../App.css';
 
-class TableComponent extends PureComponent {
+
+class TableComponent extends React.Component {
+    constructor(props){
+        super(props);
+    }
     state = {
         selected: [],
         page: 0,
-        rowsPerPage: 10,
+        rowsPerPage: 5,
     };
 
     handleChangePage = (event, page) => {
@@ -70,16 +74,14 @@ class TableComponent extends PureComponent {
                                             <TableCell className="material-table__cell" >{d.address}</TableCell>
                                             <TableCell className="material-table__cell" >{d.hospitalType}</TableCell>
                                             <TableCell>
-                                                <a data-toggle="tooltip" onClick={() => props.onViewDetail(d)} title="Share" className="p-2" style={{ color: '#111111' }} >
+                                                <a  onClick={() => props.onViewDetail(d)} className="p-2" style={{ color: '#111111' }} >
                                                     <u> ViewDetails</u>
                                                 </a>
                                             </TableCell>
-                                            <TableCell>
-                                                <a data-toggle="tooltip" title="Share" className="p-2"  >
-                                                    <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(d)} />
-                                                    {/* <img src="./images/view.png" alt="View" style={{ cursor: 'pointer', width: 25, marginRight: 10 }} /> */}
+                                            <TableCell >
 
-                                                </a>
+                                                <a data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  ><OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(d)} />  </a>
+
                                             </TableCell>
                                             {/* <br /> */}
                                         </TableRow>

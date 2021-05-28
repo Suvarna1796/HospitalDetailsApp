@@ -1,10 +1,17 @@
+body {
+  /* margin:8px; */
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px !important;
+}
+
 .MuiToolbar-dense {
   min-height: 67px !important;
   background-color :#091D42 !important;
 }
 .AppBody {
-  padding-top: 3% !important;
+  padding-top: 2% !important;
   width: 100%;
+  font-size: 19px !important;
 }
 
 /* NativeSelect{
@@ -12,14 +19,23 @@
   color:#111111 !important;
   font-size: 16px !important;
 } */
+.PrivateTabIndicator-colorSecondary-15 {
+  background-color :#091D42 !important;
+}
+.PrivateTabIndicator-colorSecondary-3 {
+  background-color :#091D42 !important;
+}
 
 .material-table {
-  font-size:14px !important;
+  font-size: 1.1rem !important;
   cursor: pointer; 
-  font-weight: 200;
+  font-weight: 200 !important;
   border-collapse: collapse !important;
   border-collapse: separate !important;
   border-spacing: 0 16px !important;
+}
+.MuiTableCell-root {
+  font-size:1rem !important;
 }
 .material-table__row{
   background-color: #E5E5E5;
@@ -28,15 +44,17 @@
 .material-table__row:hover { 
   background: #FBEA9D !important;
 }
-
+.material-table__row:active { 
+  background: #FBEA9D !important;
+}
 .material-table__cell {
   padding: 1.5em !important;
   /* position: relative; */
 }
-
+/* 
 .MuiTableRow-root .material-table__row th{
 background-color: blue !important;
-}
+} */
 select {
   background: #DFDFDF !important;
   color:#111111 !important;
@@ -52,19 +70,52 @@ select {
   border: 3px solid #BCA231 !important;
   font-size: 1.1rem !important;
   font-weight: bold !important;
+  text-transform: none !important;
 }
 
 .tab2  {
   border: 3px solid #BCA231 !important;
   font-size: 1.1rem !important;
   font-weight: bold !important;
+  text-transform: none !important;
 }
 .yellowColor{
   color:#BCA231 !important;
 }
-.TabIndicator {
-  /* background-color: #1E2F50 !important; */
-}
-.PrivateTabIndicator-colorSecondary-3{
+
+.publicTabs .PrivateTabIndicator-colorSecondary{
   color:#BCA231 !important;
+  border:1px #BCA231 !important;
+  color:#111111 !important
+}
+.publicTabs .PrivateTabIndicator-colorSecondary {
+  background-color: #1E2F50 !important;
+  border:1px #1E2F50 !important;
+  color:#111111 !important
+}
+.publicTabs .MuiTab-textColorInherit.Mui-selected{
+ background-color: #1E2F50 !important;
+ color:#fff;
+ border:1px #1E2F50 !important;
+
+}
+.publicTabs input{
+  width:50% !important;
+  background-color:#DFDFDF !important;
+  border: 1px #DFDFDF !important;
+  color: #111111;
+}
+.publicTabs select{
+  width:50% !important;
+  height:55%;
+}
+.publicTabs label{
+  vertical-align: middle
+}
+.publicTabs .btn-secondary{
+  background:#fff;
+  border:transparent;
+}
+.GridSpacing{
+  padding-top: 1% !important;
 }
