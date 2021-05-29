@@ -1,12 +1,8 @@
 import React from 'react';
-// import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Grid from '@material-ui/core/Grid'
-// import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import '../../App.css';
-import { Button } from 'reactstrap';
 
 class PublicDashboard3 extends React.Component {
     constructor(props) {
@@ -37,8 +33,6 @@ class PublicDashboard3 extends React.Component {
             <div className="publicTabs ">
                 <Tabs className="TabIndicator" centered value={value} onChange={this.handleChange} >
                     <Tab label="Basic Details" className="tab1" />
-                   {/* <Box></Box> */}
-                   <Button></Button>
                     <Tab label="Real Time Details" className="tab2" />
                 </Tabs>
                 <br />
