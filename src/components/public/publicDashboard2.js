@@ -1,9 +1,5 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import HeaderComponent from '../header'
 import TableComponent from './Table/TableComponent';
 import Grid from '@material-ui/core/Grid';
 import '../../App.css';
@@ -65,18 +61,8 @@ class PublicDashboard2 extends React.Component {
         console.log(rows, "rows in 2 render", this.state.viewDetailsFlag)
         return (
             <div >
-                <div>
-                    <AppBar position="static">
-                        <Toolbar variant="dense">
-                            <IconButton edge="start" color="inherit" aria-label="menu">
-                                <FingerprintIcon />
-                            </IconButton>
-                            <Typography variant="h6" color="inherit">
-                                Public Dashboard
-          </Typography>
-                        </Toolbar>
-                    </AppBar>
-                </div>
+                <HeaderComponent title='Public Dashboard' />
+
                 {this.state.viewDetailsFlag === true ? <div><div style={{ paddingTop: '2%' }}> <ArrowBackIcon onClick={this.sample} /></div> <PublicDashboard3 data={this.state.viewdetails} > <input type="hidden" onChange={this.sample} /></PublicDashboard3></div> :
                     <div>
                         <Grid container ><Grid></Grid></Grid>

@@ -148,3 +148,20 @@ select {
   border:1px #E4E4E4 !important;
  
  }
+.boxStyle{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s
+}
+
+.formContainer{
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+
+}
+.signUp .MuiFilledInput-input{
+  padding:20px 10px 10px !important;
+}
+button{
+  text-transform: none !important;
+  font-size: 18px !important;
+}

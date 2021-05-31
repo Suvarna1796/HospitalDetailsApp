@@ -6,29 +6,14 @@ import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 // import NativeSelect from '@material-ui/core/NativeSelect';
 import '../../App.css';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import HeaderComponent from '../header';
 
 class PublicDashboard1 extends React.Component {
 
     render() {
         return (
             <div>
-                <div>
-                    <AppBar position="static">
-                        <Toolbar variant="dense">
-                            <IconButton edge="start" color="inherit" aria-label="menu">
-                                <FingerprintIcon />
-                            </IconButton>
-                            <Typography variant="h6" color="inherit">
-                                Public Dashboard
-  </Typography>
-                        </Toolbar>
-                    </AppBar>
-                </div>
+                <HeaderComponent title='Public Dashboard' />
                 <Grid container >
                     <Grid item xs={4}>
                     </Grid>
