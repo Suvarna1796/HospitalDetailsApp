@@ -189,7 +189,7 @@ class LoginComponent extends React.Component {
                                                 onChange={this.handleChange}
                                             />
                                         </div>
-                                            <span className="error-msg">{this.state.errors.LoginCaptcha}</span>
+                                        <span className="error-msg">{this.state.errors.LoginCaptcha}</span>
                                     </Grid>
                                     <Grid item xs={3} sm={3} >
                                         <ClientCaptcha captchaCode={this.setCode} />

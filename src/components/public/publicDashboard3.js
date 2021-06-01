@@ -13,8 +13,8 @@ class PublicDashboard3 extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.sample = this.sample.bind(this);
     }
-    sample(){
-        console.log(this.state,"132413135")
+    sample() {
+        console.log(this.state, "132413135")
         this.setState({
             viewDetailsFlag: false,
         });
@@ -124,43 +124,49 @@ class PublicDashboard3 extends React.Component {
                         </Grid>
                     </Grid>
                 </div>
-               : <div>
-                    <Grid container className="GridSpacing" >
-                        <Grid item xs={5} style={{ textAlign: 'right' }}>
-                            <label className="SelectLabel" >Beds Availability</label>
+                    : <div>
+                        <Grid container className="GridSpacing" >
+                            <Grid item xs={5} style={{ textAlign: 'right' }}>
+                                <label className="SelectLabel" >Beds Availability</label>
+                            </Grid>
+                            <Grid item >&emsp;</Grid>
+                            <Grid item xs={5}>
+                                <select className="form-control" id="publicBedsSelection" name="publicBedsSelection" disabled={true}>
+                                    <option>General Beds - 10</option>
+                                    <option>Ventilator Beds</option>
+                                    <option>ICU Beds</option>
+                                </select>
+                            </Grid>
                         </Grid>
-                        <Grid item >&emsp;</Grid>
-                        <Grid item xs={5}>
-                            <select className="form-control" id="publicBedsSelection" name="publicBedsSelection" disabled={true}>
-                                <option>General Beds - 10</option>
-                                <option>Ventilator Beds</option>
-                                <option>ICU Beds</option>
-                            </select>
+                        <Grid container className="GridSpacing" >
+                            <Grid item xs={5} style={{ textAlign: 'right' }}>
+                                <label className="SelectLabel" >Oxygen Availability</label>
+                            </Grid>
+                            <Grid item >&emsp;</Grid>
+                            <Grid item xs={5} style={{ display: "flex" }}>
+                                <input type="text" id="PublicOxygenAvailability" name="PublicOxygenAvailability" className="form-control" value={this.props.data.oxygen} disabled={true} />
+                                <div style={{ flexGrow: " 1" }}>
+                                    <span style={{ fontSize: '13px', paddingLeft: '1%' }}> 15L/Cylinder</span>
+                                </div>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container className="GridSpacing" >
-                        <Grid item xs={5} style={{ textAlign: 'right' }}>
-                            <label className="SelectLabel" >Oxygen Availability</label>
+                        <Grid container className="GridSpacing" >
+                            <Grid item xs={5} style={{ textAlign: 'right' }}>
+                                <label className="SelectLabel" >Medicines Availability</label>
+                            </Grid>
+                            <Grid item >&emsp;</Grid>
+                            <Grid item xs={5}  style={{ display: "flex" }}>
+                                <select className="form-control" id="publicMedicinesSelection" name="publicMedicinesSelection" disabled={true}>
+                                    <option>Remedsvir</option>
+                                    <option>Fabiflu</option>
+                                    <option>Covaxin</option>
+                                </select>
+                                <div style={{ flexGrow: " 1" }}>
+                                    <span style={{ fontSize: '13px', paddingLeft: '1%' }}> Doses</span>
+                                </div>
+                            </Grid>
                         </Grid>
-                        <Grid item >&emsp;</Grid>
-                        <Grid item xs={5}>
-                            <input type="text" id="PublicOxygenAvailability" name="PublicOxygenAvailability" className="form-control" value={this.props.data.oxygen} disabled={true} />
-                        </Grid>
-                    </Grid>
-                    <Grid container className="GridSpacing" >
-                        <Grid item xs={5} style={{ textAlign: 'right' }}>
-                            <label className="SelectLabel" >Medicines Availability</label>
-                        </Grid>
-                        <Grid item >&emsp;</Grid>
-                        <Grid item xs={5}>
-                            <select className="form-control" id="publicMedicinesSelection" name="publicMedicinesSelection" disabled={true}>
-                                <option>Remedsvir</option>
-                                <option>Fabiflu</option>
-                                <option>Covaxin</option>
-                            </select>
-                        </Grid>
-                    </Grid>
-                </div>
+                    </div>
                 }
             </div >
         )

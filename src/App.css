@@ -100,18 +100,18 @@ select {
 
 }
 .publicTabs input{
-  width:50% !important;
   background-color:#DFDFDF !important;
   border: 1px #DFDFDF !important;
   color: #111111;
+}
+.form-control{
+  width:50% !important;
 }
 .publicTabs select{
   width:50% !important;
   height:55%;
 }
-.publicTabs label{
-  vertical-align: middle
-}
+
 .publicTabs .btn-secondary{
   background:#fff;
   border:transparent;
@@ -163,5 +163,35 @@ select {
 }
 button{
   text-transform: none !important;
+  font-size: 18px !important;
+}
+
+.publicTabs .react-date-picker__wrapper{
+  width:100% !important;
+  background-color:#DFDFDF !important;
+  border: 0px !important;
+
+}
+/* react-date-picker react-date-picker--closed react-date-picker--enabled */
+.publicTabs .react-date-picker .react-date-picker--closed .react-date-picker--enabled{
+  width:100% !important;
+  background-color:#DFDFDF !important; 
+  border: 0px !important;
+
+}
+.react-date-picker{
+  width: 50%  !important;
+  border:0px !important;
+}
+.react-date-picker .react-date-picker--closed .react-date-picker--enabled{
+  width:100% !important;
+  border: 0px !important;
+
+}
+.react-date-picker__calendar .react-calendar{
+border: 0px !important;
+}
+.react-date-picker__inputGroup{
+  padding:0px 12px !important;
   font-size: 18px !important;
 }

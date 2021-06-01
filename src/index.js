@@ -12,6 +12,7 @@ import PublicDashboard2 from './components/public/publicDashboard2.js';
 import HospitalSignUp from './components/SignUp/hospitalSignUp';
 import GovernmentSignUp from './components/SignUp/governmentSignUp';
 import PublicUserSignUp from './components/SignUp/publicUserSignUp';
+import hospitalDashboard from './components/public/hospitalDashboard';
 
 ReactDOM.render(
   <Router>
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route exact path="/hospitalSignUp" component={HospitalSignUp} />
       <Route exact path="/governmentSignUp" component={GovernmentSignUp} />
       <Route exact path="/publicUserSignUp" component={PublicUserSignUp} />
+      <Route exact path="/hospitalDashboard" component={hospitalDashboard} />
       
 
     </div>
