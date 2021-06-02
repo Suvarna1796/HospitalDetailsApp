@@ -4,9 +4,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import SearchBar from "material-ui-search-bar";
 
 var title;
 class HeaderComponent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { value: '' }
+    }
     render() {
         return (
             <div>
@@ -19,7 +24,18 @@ class HeaderComponent extends React.Component {
                         </IconButton>
                         <Typography variant="h6" color="inherit">
                             {this.props.title}
-                 </Typography>
+                        </Typography>
+
+                        <div style={{ flexGrow: 1 }}> </div>
+                        {this.props.search === 'pateintId' ?
+                            <div>
+                                <SearchBar placeholder="enter patient's id"
+                                    value={this.state.value} style={{ color: '#FFFFFF', borderRadius: '25px' }}
+                                    onChange={(newValue) => this.setState({ value: newValue })}
+                                /></div> : this.props.search === 'pateintName' ? <SearchBar placeholder="enter patient's name"
+                                    value={this.state.value} style={{ color: '#FFFFFF', borderRadius: '25px' }}
+                                    onChange={(newValue) => this.setState({ value: newValue })}
+                                /> : ''}
                     </Toolbar>
                 </AppBar>
             </div>
