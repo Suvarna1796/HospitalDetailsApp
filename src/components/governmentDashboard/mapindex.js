@@ -29,13 +29,13 @@ class CryptoDashboard extends PureComponent {
             <div>
                 <HeaderComponent title='Government Dashboard' />
 
-                <Container className="dashboard">
+                <Container >
                     <Row>
                         <Col md={12}>
                             <h3 className="page-title">{''}</h3>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="dashboard">
                         <Col md={6}>
                             <Confirmed />
                             <Active />
@@ -48,7 +48,7 @@ class CryptoDashboard extends PureComponent {
                     </Row>
                     <br />
                     <hr />
-                    <Row >
+                    <Row className="dashboard">
                         <Row  className={"pl-0 pl-sm-0 pl-md-3 pl-lg-4 pl-xl-5"}>
                             <Col>
                                 <select  style={{width:'200% ',height:'42px',border:'1px solid #DFDFDF'}} >

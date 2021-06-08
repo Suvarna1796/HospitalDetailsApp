@@ -25,7 +25,7 @@ var cols = [
   { state: 'Delhi', population: '10.2 Cr', confirmed: '34,56,777', active: '6,41,910', recovered: '41,07,092', deceased: '71,742', tested: '2.8 cr', vaccine: '1.6 cr' },
   { state: 'Telangana', population: '13.2 Cr', confirmed: '98,76,543', active: '6,41,910', recovered: '41,07,092', deceased: '71,742', tested: '2.8 cr', vaccine: '1.6 cr' },
 ]
-class GovernmentDashboard extends React.Component {
+class GovernmentDashboardTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,28 +62,29 @@ class GovernmentDashboard extends React.Component {
     console.log(rows, "rows in 2 render")
     return (
       <div >
-        <div style={{ width: '300px' }}>
+        <div style={{ width: '300px',paddingBottom:'10px'}}>
           <SearchBar placeholder="Search for date,state etc.."
-            value={this.state.value} style={{ backgroundColor: '#E8E8E8', borderRadius: '25px' }}
+            value={this.state.value} style={{ backgroundColor: '#E8E8E8' }}
             onChange={this.handleChange} onCancelSearch={this.onCancelSearch}
           />
         </div>
-        <h6 style={{textAlign:'center'}}>12th may, 5:30pm IST <span> <NotificationsIcon /><RestoreIcon /></span></h6>
+        <div style={{ display: "flex", textAlign: 'center', alignItems: 'center', justifyContent: 'center' ,paddingBottom:'10px'}}>
+          <h5 >12th may, 5:30pm IST</h5>
+          <span> <NotificationsIcon style={{ transform: 'scale(0.8)' }} /><RestoreIcon style={{ transform: 'scale(0.8)' }} /></span>
+        </div>
         <div>
           <Card md={12} xl={6} lg={6} xs={12}>
-            <CardBody className="dashboard__card-widget" >
-              <div style={{ backgroundColor: '#E8E8E8', border: '1px solid #E8E8E8' }}>
-                <div className="card__title">
-                  <h5 className="subhead">
-                    Overall Report
-                    </h5>
-                </div>
-              </div>
-              <TableComponent id="publicTable"
-                cols={this.state.cols} rows={rows}
-              >
-              </TableComponent>
-            </CardBody>
+            {/* <CardBody  > */}
+            <div style={{ backgroundColor: '#E8E8E8', border: '1px solid #E8E8E8', padding: '10px', color: '#707070' }}>
+              <h5 >
+                Overall Report
+                </h5>
+            </div>
+            <TableComponent id="publicTable"
+              cols={this.state.cols} rows={rows}
+            >
+            </TableComponent>
+            {/* </CardBody> */}
           </Card>
         </div>
 
@@ -91,4 +92,4 @@ class GovernmentDashboard extends React.Component {
     )
   }
 }
-export default GovernmentDashboard;
+export default GovernmentDashboardTable;
