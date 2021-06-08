@@ -1,105 +1,123 @@
-import React, { PureComponent } from 'react';
-import { Col } from 'reactstrap';
+import React from 'react';
+// import TablePagination from './Pagination';
+import TablePagination from '@material-ui/core/TablePagination';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import '../../../App.css';
 
-
 class TableComponent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-    }
-    state = {
-        selected: [],
-        page: 0,
-        rowsPerPage: 5,
-    };
+        this.state = {
+            page: 0,
+            rowsPerPage: 5,
+        };
 
+        this.displayRows = this.displayRows.bind(this);
+        this.displayHeaders = this.displayHeaders.bind(this);
+    }
+  
     handleChangePage = (event, page) => {
+        console.log(event, page, "pppppppppppppp")
         this.setState({ page });
     };
-
     handleChangeRowsPerPage = (event) => {
+        console.log(event)
         this.setState({ rowsPerPage: event.target.value });
     };
 
-    render() {
+    displayHeaders() {
+        var cols = this.props.rows;
+        return cols.map((colData, index) => {
+            return <TableCell key={index}>
+                <span className="header_title"> {colData.label}</span>
+            </TableCell>;
+        });
+    }
+
+    displayRows() {
+        console.log(this.state);
+        var cols = this.props.rows,
+            rows = this.props.cols;
         var props = this.props;
-        const style_view = props.onViewDetail != undefined ? {} : { display: 'none' };
-        const style_share = props.onShareDetail != undefined ? {} : { display: 'none' };
+
+        return rows.map((item, index) => {
+            // console.log(item, this.props.viewDetailsFlag, "item");
+            // handle the column data within each row
+            var cells = cols.map(function (colData, index_col) {
+                // colData.key might be "firstName"
+                // console.log(colData.key)
+                if (colData.label != '' && colData.label != 'Actions') {
+                    if (item[colData.key] == undefined) {
+                        return <TableCell key={index_col}>-</TableCell>
+                    }
+                    else {
+                        return <TableCell key={index_col}>{item[colData.key]}</TableCell>
+                    }
+                }
+            });
+            if (this.props.viewDetailsFlag == false) {
+                return <TableRow key={index}>
+                    {cells}
+                    <TableCell style={{ width: '130px' }} >
+                        <a onClick={() => props.onViewDetail(item)} className="p-2" style={{ color: '#111111' }} >
+                            <u> ViewDetails</u>
+                        </a>
+                    </TableCell>
+                    <TableCell>
+                        <a data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  >
+                            <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(item)} />  </a>
+
+                    </TableCell>
+                </TableRow>;
+            }
+            else {
+                return <TableRow key={index}>
+                    {cells}
+                </TableRow>
+            }
+
+        });
+    }
+    render() {
+        console.log(this.props, "props in table component")
+        console.log(this.state, "state in table component")
+
+        var rowComponents = this.displayRows(),
+            headerComponent = this.displayHeaders();
         const {
             rowsPerPage, page
         } = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.cols.length - (page * rowsPerPage));
-        console.log(this, "this in table component");
+        rowComponents = rowComponents.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage)
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.cols.length - (this.state.page * rowsPerPage));
 
         return (
-            <Col md={12} lg={12}>
-
+            <div>
+              
                 <div className="material-table__wrap">
-                    <Table className="material-table">
+                    <Table id="table" style={{ marginTop: '10px' }} className="material-table">
                         <TableHead>
                             <TableRow>
-                                {this.props.rows.map(row => (
-                                    <TableCell
-                                        key={row.id}>
-                                        {row.label}
-                                    </TableCell>
-                                ), this)}
+                                {headerComponent}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {this.props.cols
-                                .slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage)
-                                .map((d) => {
-                                    return (
-                                        <TableRow hover
-                                            className="material-table__row"
-                                            tabIndex={-1}
-                                            key={d.id}
-                                        >
-
-                                            <TableCell className="material-table__cell"
-                                                component="th"
-                                                scope="row"
-                                                padding="none"
-                                            >
-                                                {d.name}
-                                            </TableCell>
-                                            <TableCell className="material-table__cell" >{d.address}</TableCell>
-                                            <TableCell className="material-table__cell" >{d.hospitalType}</TableCell>
-                                            <TableCell>
-                                                <a  onClick={() => props.onViewDetail(d)} className="p-2" style={{ color: '#111111' }} >
-                                                    <u> ViewDetails</u>
-                                                </a>
-                                            </TableCell>
-                                            <TableCell >
-
-                                                <a data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  ><OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(d)} />  </a>
-
-                                            </TableCell>
-                                            {/* <br /> */}
-                                        </TableRow>
-                                    );
-                                })}
+                        <TableBody >{rowComponents}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
                                     <TableCell colSpan={6} />
                                 </TableRow>
-                            )}
-                        </TableBody>
+                            )}</TableBody>
                     </Table>
                 </div>
                 <TablePagination
                     component="div"
                     className="material-table__pagination"
                     count={this.props.cols.length}
-                    rowsPerPage={rowsPerPage}
+                    rowsPerPage={this.state.rowsPerPage}
                     page={page}
                     backIconButtonProps={{ 'aria-label': 'Previous Page' }}
                     nextIconButtonProps={{ 'aria-label': 'Next Page' }}
@@ -107,9 +125,9 @@ class TableComponent extends React.Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                     rowsPerPageOptions={[]}
                 />
-
-            </Col>
+            </div>
         );
     }
 }
-export default TableComponent
+
+export default (TableComponent);

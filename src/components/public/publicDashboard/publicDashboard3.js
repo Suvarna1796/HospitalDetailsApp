@@ -2,7 +2,7 @@ import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import '../../App.css';
+import '../../../App.css';
 
 class PublicDashboard3 extends React.Component {
     constructor(props) {

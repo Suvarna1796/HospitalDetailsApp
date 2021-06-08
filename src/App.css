@@ -195,3 +195,9 @@ border: 0px !important;
   padding:0px 12px !important;
   font-size: 18px !important;
 }
+/* .recharts-layer .recharts-cartesian-axis .recharts-xAxis .xAxis line{
+  stroke:#BCA231 !important;
+} */
+.dashboard div{
+padding-bottom: 10px;
+}

@@ -5,8 +5,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 // import NativeSelect from '@material-ui/core/NativeSelect';
-import '../../App.css';
-import HeaderComponent from '../header';
+import '../../../App.css';
+import HeaderComponent from '../../header';
 
 class PublicDashboard1 extends React.Component {
 

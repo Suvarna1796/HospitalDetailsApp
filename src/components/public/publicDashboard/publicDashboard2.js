@@ -1,8 +1,8 @@
 import React from 'react';
-import HeaderComponent from '../header'
-import TableComponent from './Table/TableComponent';
+import HeaderComponent from '../../header'
+import TableComponent from '../Table/TableComponent';
 import Grid from '@material-ui/core/Grid';
-import '../../App.css';
+import '../../../App.css';
 import copy from "copy-to-clipboard";
 import PublicDashboard3 from './publicDashboard3';
 import { Link } from 'react-router-dom';
@@ -10,11 +10,11 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 var rows = [
-    { id: 'name', label: 'Name' },
-    { id: 'address', label: 'Address' },
-    { id: 'hospitalType', label: 'Hospital Type' },
-    { id: 'viewDetails', label: '' },
-    { id: 'icon', label: '' },
+    { key: 'name', label: 'Name' },
+    { key: 'address', label: 'Address' },
+    { key: 'hospitalType', label: 'Hospital Type' },
+    { key: 'viewDetails', label: '' },
+    { key: 'icon', label: '' },
 ]
 var cols = [
     { name: "Banglore Institute of Medical Sciences", address: "Yeshwanthpur", hospitalType: "Government", id: 1, oxygen: "200 Cylinders" },
@@ -75,6 +75,7 @@ class PublicDashboard2 extends React.Component {
                             <Grid item xs={6}>
                                 <TableComponent id="publicTable"
                                     cols={cols} rows={rows}
+                                    viewDetailsFlag={this.state.viewDetailsFlag}
                                     onViewDetail={this.handleOpenEditRow}
                                     onShareDetail={this.shareDetailsRow}
                                 >

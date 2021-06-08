@@ -18,8 +18,8 @@ class HeaderComponent extends React.Component {
                 <AppBar position="static">
                     <Toolbar variant="dense">
                         <IconButton edge="start" color="inherit" aria-label="menu">
-                            <FingerprintIcon />
-                            {/* <img src="./images/headerIcon.jpeg" alt=" " className="styleIcon" style={{ }}/> */}
+                            {/* <FingerprintIcon /> */}
+                            <img src="./images/fingerPintIcon.png" alt=" " className="styleIcon" style={{width:'40px'}}/>
 
                         </IconButton>
                         <Typography variant="h6" color="inherit">
