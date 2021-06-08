@@ -1,8 +1,8 @@
 import React from 'react';
-import HeaderComponent from '../../header'
+import HeaderComponent from '../header'
 import TableComponent from '../Table/TableComponent';
 import Grid from '@material-ui/core/Grid';
-import '../../../App.css';
+import '../../App.css';
 import copy from "copy-to-clipboard";
 import PublicDashboard3 from './publicDashboard3';
 import { Link } from 'react-router-dom';

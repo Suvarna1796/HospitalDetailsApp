@@ -5,8 +5,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 // import NativeSelect from '@material-ui/core/NativeSelect';
-import '../../../App.css';
-import HeaderComponent from '../../header';
+import '../../App.css';
+import HeaderComponent from '../header';
 
 class PublicDashboard1 extends React.Component {
 
@@ -83,8 +83,8 @@ class PublicDashboard1 extends React.Component {
                             }
                             label="search for nearby Hospitals"
                         />
-                        <Grid container spacing={3}>
-                            <Grid item xs>
+                        <Grid container>
+                            <Grid item xs={1}>
                             </Grid>
                             <Grid item xs={5}>
                                 <Button style={{ backgroundColor: "#BCA231", color: "#fff", textTransform: 'none' }}>

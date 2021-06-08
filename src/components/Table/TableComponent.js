@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import '../../../App.css';
+import '../../App.css';
 
 class TableComponent extends React.Component {
     constructor(props) {

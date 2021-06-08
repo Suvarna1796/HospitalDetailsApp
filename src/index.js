@@ -7,13 +7,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './components/SignUp/login';
 import SignUp from './components/SignUp/hospitalSignUp';
 import reportWebVitals from './reportWebVitals';
-import PublicDashboard1 from './components/public/publicDashboard/publicDashboard1.js';
-import PublicDashboard2 from './components/public/publicDashboard/publicDashboard2.js';
+import PublicDashboard1 from './components/publicDashboard/publicDashboard1.js';
+import PublicDashboard2 from './components/publicDashboard/publicDashboard2.js';
 import HospitalSignUp from './components/SignUp/hospitalSignUp';
 import GovernmentSignUp from './components/SignUp/governmentSignUp';
 import PublicUserSignUp from './components/SignUp/publicUserSignUp';
-import hospitalDashboard from './components/public/hospitalDashboard';
-import chart from './components/public/governmentDashboard/mapindex';
+import hospitalDashboard from './components/hospitalDashboard/hospitalDashboard';
+import chart from './components/governmentDashboard/mapindex';
 
 ReactDOM.render(
   <Router>
