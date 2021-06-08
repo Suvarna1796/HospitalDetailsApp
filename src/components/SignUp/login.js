@@ -51,53 +51,49 @@ class LoginComponent extends React.Component {
         switch (fieldName) {
             case 'LoginId':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ LoginId: undefined });
-                        this.state.errors.LoginId = 'LoginId should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ LoginId: undefined, errorLoginId: 'LoginId should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.LoginId = '';
+                        this.setState({ errorLoginId: '' });
                     }
                 }
                 else {
-                    this.setState({ LoginId: '' });
-                    this.state.errors.LoginId = 'Required';
+                    this.setState({ LoginId: '', errorLoginId: 'Required' });
                 }
                 break;
             case 'LoginPwd':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ LoginPwd: undefined });
-                        this.state.errors.LoginPwd = 'Password should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ LoginPwd: undefined, errorLoginPwd: 'Password should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.LoginPwd = '';
+                        this.setState({ errorLoginPwd: '' })
                     }
                 }
                 else {
-                    this.setState({ LoginPwd: '' });
-                    this.state.errors.LoginPwd = 'Required';
+                    this.setState({ LoginPwd: '', errorLoginPwd: 'Required' });
                 }
+                break;
+            default:
                 break;
         }
     }
     handleLogin() {
         //captcha validation
         if (this.state.inputCaptcha) {
-            this.state.CaptchaIsValid = false;
+            this.setState({ CaptchaIsValid: false });
             if (this.state.captchaCode !== this.state.inputCaptcha) {
                 console.log("11111111111111111111111111111");
-                this.state.errors.LoginCaptcha = 'Please enter Valid captcha';
+                this.setState({ errorLoginCaptcha: 'Please enter Valid captcha' });
 
             } else {
-                this.state.errors.LoginCaptcha = '';
-                this.setState({ CaptchaIsValid: false })
+                this.setState({ CaptchaIsValid: false, errorLoginCaptcha: '' })
                 console.log("222222222")
             }
         }
         else {
-            this.setState({ LoginCaptcha: '' });
-            this.state.errors.LoginCaptcha = 'Required';
+            this.setState({ LoginCaptcha: '', errorLoginCaptcha: 'Required' });
         }
         if (this.state.LoginId === '' || this.state.LoginPwd === '') {
             this.setState({ SignUpValidation: true })
@@ -153,7 +149,7 @@ class LoginComponent extends React.Component {
                                             name="LoginId"
                                             onChange={this.handleChange}
                                         />
-                                        <span className="error-msg">{this.state.errors.LoginId}</span>
+                                        <span className="error-msg">{this.state.errorLoginId}</span>
                                     </Grid>
 
                                 </Grid>
@@ -171,7 +167,7 @@ class LoginComponent extends React.Component {
                                             name="LoginPwd"
                                             onChange={this.handleChange}
                                         />
-                                        <span className="error-msg">{this.state.errors.LoginPwd}</span></Grid>
+                                        <span className="error-msg">{this.state.errorLoginPwd}</span></Grid>
 
                                 </Grid>
                                 <Grid container style={{ paddingLeft: '25%' }}>
@@ -189,7 +185,7 @@ class LoginComponent extends React.Component {
                                                 onChange={this.handleChange}
                                             />
                                         </div>
-                                        <span className="error-msg">{this.state.errors.LoginCaptcha}</span>
+                                        <span className="error-msg">{this.state.errorLoginCaptcha}</span>
                                     </Grid>
                                     <Grid item xs={3} sm={3} >
                                         <ClientCaptcha captchaCode={this.setCode} />

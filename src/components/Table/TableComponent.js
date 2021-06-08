@@ -20,7 +20,7 @@ class TableComponent extends React.Component {
         this.displayRows = this.displayRows.bind(this);
         this.displayHeaders = this.displayHeaders.bind(this);
     }
-  
+
     handleChangePage = (event, page) => {
         console.log(event, page, "pppppppppppppp")
         this.setState({ page });
@@ -51,8 +51,8 @@ class TableComponent extends React.Component {
             var cells = cols.map(function (colData, index_col) {
                 // colData.key might be "firstName"
                 // console.log(colData.key)
-                if (colData.label != '' && colData.label != 'Actions') {
-                    if (item[colData.key] == undefined) {
+                if (colData.label !== '') {
+                    if (item[colData.key] === undefined) {
                         return <TableCell key={index_col}>-</TableCell>
                     }
                     else {
@@ -60,7 +60,7 @@ class TableComponent extends React.Component {
                     }
                 }
             });
-            if (this.props.viewDetailsFlag == false) {
+            if (this.props.viewDetailsFlag === false) {
                 return <TableRow key={index}>
                     {cells}
                     <TableCell style={{ width: '130px' }} >
@@ -73,7 +73,7 @@ class TableComponent extends React.Component {
                             <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(item)} />  </a>
 
                     </TableCell>
-                </TableRow>;
+                </TableRow>
             }
             else {
                 return <TableRow key={index}>
@@ -97,7 +97,7 @@ class TableComponent extends React.Component {
 
         return (
             <div>
-              
+
                 <div className="material-table__wrap">
                     <Table id="table" style={{ marginTop: '10px' }} className="material-table">
                         <TableHead>

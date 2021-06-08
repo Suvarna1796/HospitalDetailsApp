@@ -45,17 +45,17 @@ class HospitalSignUp extends React.Component {
         }
         //captcha validation
         if (this.state.inputCaptcha) {
-            this.setState({ SignUpValidation: false,CaptchaIsValid:false })
+            this.setState({ SignUpValidation: false, CaptchaIsValid: false })
             if (this.state.captchaCode !== this.state.inputCaptcha) {
-                this.state.errors.inputCaptcha = 'Please enter valid captcha';
+                this.setState({ errorCaptcha: 'Please enter valid captcha' })
             } else {
-                this.state.errors.inputCaptcha = '';
+                this.setState({ errorCaptcha: '' });
                 this.setState({ CaptchaIsValid: false })
             }
         }
         else {
             this.setState({ inputCaptcha: '' });
-            this.state.errors.inputCaptcha = 'Required';
+            this.setState({ errorCaptcha: 'Required' });
         }
     }
 
@@ -78,133 +78,118 @@ class HospitalSignUp extends React.Component {
         switch (fieldName) {
             case 'hospName':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ hospName: undefined });
-                        this.state.errors.hospName = 'Hospital Name should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ hospName: undefined, errorhospName: 'Hospital Name should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.hospName = '';
+                        this.setState({ errorhospName: '' });
                     }
                 }
                 else {
-                    this.setState({ hospName: '' });
-                    this.state.errors.hospName = 'Required';
+                    this.setState({ hospName: '', errorhospName: 'Required' });
                 }
                 break;
 
             case 'contactNum':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
-                        this.setState({ contactNum: undefined });
-                        this.state.errors.contactNum = 'Please enter Valid Contact Number';
+                        this.setState({ contactNum: undefined, errorcontactNum: 'Please enter Valid Contact Number' });
                     }
                     else {
-                        this.state.errors.contactNum = '';
+                        this.setState({ errorcontactNum: '' });
                     }
                 }
                 else {
-                    this.setState({ contactNum: '' });
-                    this.state.errors.contactNum = 'Required';
+                    this.setState({ contactNum: '', errorcontactNum: 'Required' });
                 }
                 break;
 
             case 'licenseNumber':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ licenseNumber: undefined });
-                        this.state.errors.licenseNumber = 'License Number should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ licenseNumber: undefined, errorlicenseNumber: 'License Number should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.licenseNumber = '';
+                        this.setState({ errorlicenseNumber: '' });
                     }
                 }
                 else {
-                    this.setState({ licenseNumber: '' });
-                    this.state.errors.licenseNumber = 'Required';
+                    this.setState({ licenseNumber: '', errorlicenseNumber: 'Required' });
                 }
                 break;
             case 'registartion':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ registartion: undefined });
-                        this.state.errors.registartion = 'registartion should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ registartion: undefined, errorregistartion: 'registartion should be alphanumeric and Special Character' })
                     }
                     else {
-                        this.state.errors.registartion = '';
+                        this.setState({ errorregistartion: '' });
                     }
                 }
                 else {
-                    this.setState({ registartion: '' });
-                    this.state.errors.registartion = 'Required';
+                    this.setState({ registartion: '', errorregistartion: 'Required' });
                 }
                 break;
             case 'hospType':
                 if (value === undefined && value === '' && value === null) {
-                    this.setState({ hospType: '' });
-                    this.state.errors.hospType = 'Required';
+                    this.setState({ hospType: '', errorsHospType: 'Required' });
 
                 }
                 break;
             case 'address':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ address: undefined });
-                        this.state.errors.address = 'Address should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ address: undefined, errorsAddress: 'Address should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.address = '';
+                        this.setState({ errorsAddress: '' });
                     }
                 }
                 else {
-                    this.setState({ address: '' });
-                    this.state.errors.address = 'Required';
+                    this.setState({ address: '', errorsAddress: 'Required' })
                 }
                 break;
             case 'city':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z ]*$/)) {
-                        this.setState({ city: undefined });
-                        this.state.errors.city = 'Please enter valid City';
+                        this.setState({ city: undefined, errorsCity: 'Please enter valid City' });
                     }
                     else {
-                        this.state.errors.city = '';
+                        this.setState({ errorsCity: '' });
                     }
                 }
                 else {
-                    this.setState({ city: '' });
-                    this.state.errors.city = 'Required';
+                    this.setState({ city: '', errorsCity: 'Required' });
                 }
                 break;
             case 'gstate':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z ]*$/)) {
-                        this.setState({ gstate: undefined });
-                        this.state.errors.gstate = 'Please enter valid State';
+                        this.setState({ gstate: undefined, errorsGstate: 'Please enter valid State' });
                     }
                     else {
-                        this.state.errors.gstate = '';
+                        this.setState({ errorsGstate: '' });
                     }
                 }
                 else {
-                    this.setState({ gstate: '' });
-                    this.state.errors.gstate = 'Required';
+                    this.setState({ gstate: '', errorsGstate: 'Required' });
                 }
                 break;
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
-                        this.setState({ pinCode: undefined });
-                        this.state.errors.pinCode = 'Please enter valid Pin Code ';
+                        this.setState({ pinCode: undefined, errorsPinCode: 'Please enter valid Pin Code ' });
                     }
                     else {
-                        this.state.errors.pinCode = '';
+                        this.setState({ errorsPinCode: '' });
                     }
                 }
                 else {
-                    this.setState({ pinCode: '' });
-                    this.state.errors.pinCode = 'Required';
+                    this.setState({ pinCode: '', errorsPinCode: 'Required' });
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -240,7 +225,7 @@ class HospitalSignUp extends React.Component {
                                     name="hospName"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.hospName}</span>
+                                <span className="error-msg">{this.state.errorhospName}</span>
                             </Grid>
 
                         </Grid>
@@ -256,7 +241,7 @@ class HospitalSignUp extends React.Component {
                                     name="contactNum"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.contactNum}</span>
+                                <span className="error-msg">{this.state.errorcontactNum}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -271,7 +256,7 @@ class HospitalSignUp extends React.Component {
                                     name="licenseNumber"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.licenseNumber}</span>
+                                <span className="error-msg">{this.state.errorlicenseNumber}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -286,14 +271,14 @@ class HospitalSignUp extends React.Component {
                                     name="registartion"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.registartion}</span>
+                                <span className="error-msg">{this.state.errorregistartion}</span>
                             </Grid>
                         </Grid>
 
                         <Grid container className="formContainer " justify="center">
                             <Grid item xs={8}>
 
-                                <select  style={{width:'100% ',height:'42px',border:'1px solid #DFDFDF'}}  name="hospType" onChange={this.handleChange}>
+                                <select style={{ width: '100% ', height: '42px', border: '1px solid #DFDFDF' }} name="hospType" onChange={this.handleChange}>
                                     {/* <option  disabled>Choose a salutation ...</option> */}
                                     <option value="">Hospital Type</option>
                                     {/* <option disabled selected hidden>Choose Gender...</option> */}
@@ -305,7 +290,7 @@ class HospitalSignUp extends React.Component {
                                     <option>Others</option>
 
                                 </select>
-                                <span className="error-msg">{this.state.errors.hospType}</span>
+                                <span className="error-msg">{this.state.errorsHospType}</span>
                             </Grid>
                         </Grid>
 
@@ -321,7 +306,7 @@ class HospitalSignUp extends React.Component {
                                     name="address"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.address}</span>
+                                <span className="error-msg">{this.state.errorsAddress}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -336,7 +321,7 @@ class HospitalSignUp extends React.Component {
                                     name="city"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.city}</span>
+                                <span className="error-msg">{this.state.errorsCity}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -351,7 +336,7 @@ class HospitalSignUp extends React.Component {
                                     name="gstate"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.gstate}</span>
+                                <span className="error-msg">{this.state.errorsGstate}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify='center'>
@@ -366,7 +351,7 @@ class HospitalSignUp extends React.Component {
                                     name="pinCode"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.pinCode}</span>
+                                <span className="error-msg">{this.state.errorsPinCode}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify='center'>
@@ -382,7 +367,7 @@ class HospitalSignUp extends React.Component {
                                         autoComplete="false"
                                         onChange={this.handleChange}
                                     />
-                                    <span className="error-msg">{this.state.errors.inputCaptcha}</span>
+                                    <span className="error-msg">{this.state.errorCaptcha}</span>
                                 </div>
                             </Grid>
                             <Grid item xs={4} style={{ paddingLeft: '10px' }} >

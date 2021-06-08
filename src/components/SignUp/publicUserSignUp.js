@@ -44,27 +44,25 @@ class PublicUserSignUp extends React.Component {
         }
         //captcha validation
         if (this.state.inputCaptcha) {
-            this.state.CaptchaIsValid = false;
+            this.setState({ CaptchaIsValid: false });
             if (this.state.captchaCode !== this.state.inputCaptcha) {
-                this.state.errors.inputCaptcha = 'Please enter valid captcha';
+                this.setState({ errorCaptcha: 'Please enter valid captcha' })
             } else {
-                this.state.errors.inputCaptcha = '';
-                this.setState({ CaptchaIsValid: false })
+                this.setState({ CaptchaIsValid: false, errorCaptcha: '' })
             }
         }
         else {
-            this.setState({ inputCaptcha: '' });
-            this.state.errors.inputCaptcha = 'Required';
+            this.setState({ inputCaptcha: '', errorCaptcha: 'Required' });
         }
 
         //password validation
         if (this.state.setPassword && this.state.cnfPassword) {
             if (this.state.setPassword === this.state.cnfPassword) {
-                this.state.errors.cnfPassword = '';
+                this.setState({ errorsCnfPassword: '' });
 
             }
             else {
-                this.state.errors.cnfPassword = 'Passwords do not match';
+                this.setState({ errorsCnfPassword: 'Passwords do not match' });
             }
         }
     }
@@ -88,156 +86,138 @@ class PublicUserSignUp extends React.Component {
         switch (fieldName) {
             case 'firstName':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ firstName: undefined });
-                        this.state.errors.firstName = 'First Name should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ firstName: undefined, errorsFirstName: 'First Name should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.firstName = '';
+                        this.setState({ errorsFirstName: '' });
                     }
                 }
                 else {
-                    this.setState({ firstName: '' });
-                    this.state.errors.firstName = 'Required';
+                    this.setState({ firstName: '', errorsFirstName: 'Required' });
                 }
                 break;
             case 'lastName':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ lastName: undefined });
-                        this.state.errors.lastName = 'Last Name should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ lastName: undefined, errorLastName: 'Last Name should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.lastName = '';
+                        this.setState({ errorLastName: '' });
                     }
                 }
                 else {
-                    this.setState({ lastName: '' });
-                    this.state.errors.lastName = 'Required';
+                    this.setState({ lastName: '', errorLastName: 'Required' });
                 }
                 break;
             case 'mobileNumber':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
-                        this.setState({ mobileNumber: undefined });
-                        this.state.errors.mobileNumber = 'Please enter Valid Mobile Number';
+                        this.setState({ mobileNumber: undefined, errorMobileNumber: 'Please enter Valid Mobile Number' });
                     }
                     else {
-                        this.state.errors.mobileNumber = '';
+                        this.setState({ errorMobileNumber: '' });
                     }
                 }
                 else {
-                    this.setState({ mobileNumber: '' });
-                    this.state.errors.mobileNumber = 'Required';
+                    this.setState({ mobileNumber: '', errorMobileNumber: 'Required' });
                 }
                 break;
 
             case 'mailAdd':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z0-9._%/+*-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,5}|[a-zA-z]{2,5}\.[a-zA-Z]{2,5})$/)) {
-                        this.setState({ mailAdd: undefined });
-                        this.state.errors.mailAdd = ' Please enter valid mail address';
+                        this.setState({ mailAdd: undefined, errorsMailAdd: 'Please enter valid mail address' });
                     }
                     else {
-                        this.state.errors.mailAdd = '';
+                        this.setState({ errorsMailAdd: '' });
                     }
                 }
                 else {
-                    this.setState({ mailAdd: '' });
-                    this.state.errors.mailAdd = 'Required';
+                    this.setState({ mailAdd: '', errorsMailAdd: 'Required' });
                 }
                 break;
             case 'setPassword':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ setPassword: undefined });
-                        this.state.errors.setPassword = 'Set Password should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ setPassword: undefined, errorSetPassword: 'Set Password should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.setPassword = '';
+                        this.setState({ errorSetPassword: '' });
                     }
                 }
                 else {
-                    this.setState({ setPassword: '' });
-                    this.state.errors.setPassword = 'Required';
+                    this.setState({ setPassword: '', errorSetPassword: 'Required' });
                 }
                 break;
 
             case 'cnfPassword':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ cnfPassword: undefined });
-                        this.state.errors.cnfPassword = 'Confirm Password should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ cnfPassword: undefined, errorsCnfPassword: 'Confirm Password should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.cnfPassword = '';
+                        this.setState({ errorsCnfPassword: '' });
                     }
                 }
                 else {
-                    this.setState({ cnfPassword: '' });
-                    this.state.errors.cnfPassword = 'Required';
+                    this.setState({ cnfPassword: '', errorsCnfPassword: 'Required' });
                 }
                 break;
             case 'address':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
-                        this.setState({ address: undefined });
-                        this.state.errors.address = 'Address should be alphanumeric and Special Character';
+                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                        this.setState({ address: undefined, errorAddress: 'Address should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.state.errors.address = '';
+                        this.setState({ errorAddress: '' });
                     }
                 }
                 else {
-                    this.setState({ address: '' });
-                    this.state.errors.address = 'Required';
+                    this.setState({ address: '', errorAddress: 'Required' });
                 }
                 break;
             case 'city':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z ]*$/)) {
-                        this.setState({ city: undefined });
-                        this.state.errors.city = 'Please enter valid City';
+                        this.setState({ city: undefined, errorCity: 'Please enter valid City' });
                     }
                     else {
-                        this.state.errors.city = '';
+                        this.setState({ errorCity: '' });
                     }
                 }
                 else {
-                    this.setState({ city: '' });
-                    this.state.errors.city = 'Required';
+                    this.setState({ city: '', errorCity: 'Required' });
                 }
                 break;
             case 'gstate':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z ]*$/)) {
-                        this.setState({ gstate: undefined });
-                        this.state.errors.gstate = 'Please enter valid State';
+                        this.setState({ gstate: undefined, errorGstate: 'Please enter valid State' })
                     }
                     else {
-                        this.state.errors.gstate = '';
+                        this.setState({ errorGstate: '' });
                     }
                 }
                 else {
-                    this.setState({ gstate: '' });
-                    this.state.errors.gstate = 'Required';
+                    this.setState({ gstate: '', errorGstate: 'Required' });
                 }
                 break;
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
-                        this.setState({ pinCode: undefined });
-                        this.state.errors.pinCode = 'Please enter valid Pin Code ';
+                        this.setState({ pinCode: undefined, errorPinCode: 'Please enter valid Pin Code ' });
                     }
                     else {
-                        this.state.errors.pinCode = '';
+                        this.setState({ errorPinCode: '' });
                     }
                 }
                 else {
-                    this.setState({ pinCode: '' });
-                    this.state.errors.pinCode = 'Required';
+                    this.setState({ pinCode: '', errorPinCode: 'Required' });
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -272,7 +252,7 @@ class PublicUserSignUp extends React.Component {
                                     name="firstName"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.firstName}</span>
+                                <span className="error-msg">{this.state.errorsFirstName}</span>
                             </Grid>
                             <Grid item xs={4} style={{ paddingLeft: '1%' }}>
                                 <TextField
@@ -285,7 +265,7 @@ class PublicUserSignUp extends React.Component {
                                     name="lastName"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.lastName}</span>
+                                <span className="error-msg">{this.state.errorLastName}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -300,7 +280,7 @@ class PublicUserSignUp extends React.Component {
                                     name="mobileNumber"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.mobileNumber}</span>
+                                <span className="error-msg">{this.state.errorMobileNumber}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -315,7 +295,7 @@ class PublicUserSignUp extends React.Component {
                                     name="mailAdd"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.mailAdd}</span>
+                                <span className="error-msg">{this.state.errorsMailAdd}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -330,7 +310,7 @@ class PublicUserSignUp extends React.Component {
                                     name="setPassword"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.setPassword}</span>
+                                <span className="error-msg">{this.state.errorSetPassword}</span>
                             </Grid>
                         </Grid>
 
@@ -346,7 +326,7 @@ class PublicUserSignUp extends React.Component {
                                     name="cnfPassword"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.cnfPassword}</span>
+                                <span className="error-msg">{this.state.errorsCnfPassword}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -361,7 +341,7 @@ class PublicUserSignUp extends React.Component {
                                     name="address"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.address}</span>
+                                <span className="error-msg">{this.state.errorAddress}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -376,7 +356,7 @@ class PublicUserSignUp extends React.Component {
                                     name="city"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.city}</span>
+                                <span className="error-msg">{this.state.errorCity}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -391,7 +371,7 @@ class PublicUserSignUp extends React.Component {
                                     name="gstate"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.gstate}</span>
+                                <span className="error-msg">{this.state.errorGstate}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify='center'>
@@ -406,7 +386,7 @@ class PublicUserSignUp extends React.Component {
                                     name="pinCode"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errors.pinCode}</span>
+                                <span className="error-msg">{this.state.errorPinCode}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify='center'>
@@ -422,7 +402,7 @@ class PublicUserSignUp extends React.Component {
                                         autoComplete="false"
                                         onChange={this.handleChange}
                                     />
-                                    <span className="error-msg">{this.state.errors.inputCaptcha}</span>
+                                    <span className="error-msg">{this.state.errorCaptcha}</span>
                                 </div>
                             </Grid>
                             <Grid item xs={4} style={{ paddingLeft: '10px' }} >

@@ -45,21 +45,16 @@ export default class Confirmed extends PureComponent {
   }
 
   render() {
-    const { activeIndex } = this.state;
-    const activeItem = data[activeIndex];
 
     return (
       <Col md={12} lg={6} xs={12}>
         <Card style={{ backgroundColor: '#FFEBEF' }}>
           <CardBody className="dashboard__card-widget" >
             <div className="card__title">
-              {/* <h5 className="bold-text">ETH</h5> */}
               <h5 className="subhead">Confirmed</h5>
             </div>
             <div className="dashboard__total dashboard__total--area">
-              {/* <TrendingDownIcon className="dashboard__trend-icon" /> */}
               <p className="dashboard__total-stat">
-                {/* ${(activeItem.eth).toFixed(2)} */}
                 2,15,48,498
               </p>
               <ResponsiveContainer height={70} className="dashboard__chart-container">

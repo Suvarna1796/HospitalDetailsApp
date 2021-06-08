@@ -2,7 +2,7 @@ import React from 'react';
 import TableComponent from '../Table/TableComponent';
 import '../../App.css';
 import SearchBar from "material-ui-search-bar";
-import { Card, CardBody } from 'reactstrap';
+import { Card } from 'reactstrap';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import RestoreIcon from '@material-ui/icons/Restore';
 

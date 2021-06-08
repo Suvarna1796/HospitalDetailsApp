@@ -45,21 +45,16 @@ export default class Active extends PureComponent {
   }
 
   render() {
-    const { activeIndex } = this.state;
-    const activeItem = data[activeIndex];
 
     return (
       <Col md={12} xl={6} lg={6} xs={12}>
         <Card style={{backgroundColor:'#E5F1FF'}}>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              {/* <h5 className="bold-text">Bch</h5> */}
               <h5 className="subhead">Active</h5>
             </div>
             <div className="dashboard__total dashboard__total--area">
-              {/* <TrendingUpIcon className="dashboard__trend-icon" /> */}
               <p className="dashboard__total-stat">
-                {/* ${(activeItem.bch).toFixed(2)} */}
                 31,51,852
               </p>
               <ResponsiveContainer height={70} className="dashboard__chart-container">

@@ -43,123 +43,108 @@ class hopitalDefaultComponent extends React.Component {
             case 'hsptotalPatients':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]+$/)) {
-                        this.setState({ hsptotalPatients: undefined });
-                        this.state.errors.hsptotalPatients = 'Please enter valid number';
+                        this.setState({ hsptotalPatients: undefined, errorHsptotalPatients: 'Please enter valid number' });
                     }
                     else {
-                        this.state.errors.hsptotalPatients = '';
+                        this.setState({ errorHsptotalPatients: '' });
                     }
                 }
                 else {
-                    this.setState({ hsptotalPatients: '' });
-                    this.state.errors.hsptotalPatients = 'Required';
+                    this.setState({ hsptotalPatients: '', errorHsptotalPatients: 'Required' });
                 }
                 break;
             case 'hspOxygenAvail':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^(?:[0-9]|[a-zA-Z ]+[0-9])[a-zA-Z0-9 ]*$/i)) {
-                        this.setState({ hspOxygenAvail: undefined });
-                        this.state.errors.hspOxygenAvail = 'Please enter valid number';
+                        this.setState({ hspOxygenAvail: undefined, errorHspOxygenAvail: 'Please enter valid number' });
                     }
                     else {
-                        this.state.errors.hspOxygenAvail = '';
+                        this.setState({ errorHspOxygenAvail: '' });
                     }
                 }
                 else {
-                    this.setState({ hspOxygenAvail: '' });
-                    this.state.errors.hspOxygenAvail = 'Required';
+                    this.setState({ hspOxygenAvail: '', errorHspOxygenAvail: 'Required' });
                 }
                 break;
             case 'hspPatientName':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[A-Za-z]+$/)) {
-                        this.setState({ hspPatientName: undefined });
-                        this.state.errors.hspPatientName = 'Please enter valid name';
+                        this.setState({ hspPatientName: undefined, errorHspPatientName: 'Please enter valid name' });
                     }
                     else {
-                        this.state.errors.hspPatientName = '';
+                        this.setState({ errorHspPatientName: '' });
                     }
                 }
                 else {
-                    this.setState({ hspPatientName: '' });
-                    this.state.errors.hspPatientName = 'Required';
+                    this.setState({ hspPatientName: '', errorHspPatientName: 'Required' });
                 }
                 break;
             case 'hspPatientId':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]+$/)) {
-                        this.setState({ hspPatientId: undefined });
-                        this.state.errors.hspPatientId = 'Please enter valid ID';
+                        this.setState({ hspPatientId: undefined, errorHspPatientId: 'Please enter valid ID' });
                     }
                     else {
-                        this.state.errors.hspPatientId = '';
+                        this.setState({ errorHspPatientId: '' });
                     }
                 }
                 else {
-                    this.setState({ hspPatientId: '' });
-                    this.state.errors.hspPatientId = 'Required';
+                    this.setState({ hspPatientId: '', errorHspPatientId: 'Required' });
                 }
                 break;
             case 'hspPatientAge':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]{2,3}$/)) {
-                        this.setState({ hspPatientAge: undefined });
-                        this.state.errors.hspPatientAge = 'Please enter valid Age';
+                        this.setState({ hspPatientAge: undefined, errorHspPatientAge: 'Please enter valid Age' });
                     }
                     else {
-                        this.state.errors.hspPatientAge = '';
+                        this.setState({ errorHspPatientAge: '' });
                     }
                 }
                 else {
-                    this.setState({ hspPatientAge: '' });
-                    this.state.errors.hspPatientAge = 'Required';
+                    this.setState({ hspPatientAge: '', errorHspPatientAge: 'Required' });
                 }
                 break;
             case 'hspPatientAadhar':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[0-9]{12}$/)) {
-                        this.setState({ hspPatientAadhar: undefined });
-                        this.state.errors.hspPatientAadhar = 'Please enter valid Aadhar Number';
+                        this.setState({ hspPatientAadhar: undefined, errorHspPatientAadhar: 'Please enter valid Aadhar Number' });
                     }
                     else {
-                        this.state.errors.hspPatientAadhar = '';
+                        this.setState({ errorHspPatientAadhar: '' });
                     }
                 }
                 else {
-                    this.setState({ hspPatientAadhar: '' });
-                    this.state.errors.hspPatientAadhar = 'Required';
+                    this.setState({ hspPatientAadhar: '', errorHspPatientAadhar: 'Required' });
                 }
                 break;
             case 'hspAdmissionDetail':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[A-Za-z]+$/)) {
-                        this.setState({ hspAdmissionDetail: undefined });
-                        this.state.errors.hspAdmissionDetail = 'Please enter valid Admission Details';
+                        this.setState({ hspAdmissionDetail: undefined, errorHspAdmissionDetail: 'Please enter valid Admission Details' });
                     }
                     else {
-                        this.state.errors.hspAdmissionDetail = '';
+                        this.setState({ errorHspAdmissionDetail: '' });
                     }
                 }
                 else {
-                    this.setState({ hspAdmissionDetail: '' });
-                    this.state.errors.hspAdmissionDetail = 'Required';
+                    this.setState({ hspAdmissionDetail: '', errorHspAdmissionDetail: 'Required' });
                 }
                 break;
             case 'hspPatientStatus':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[A-Za-z]+$/)) {
-                        this.setState({ hspPatientStatus: undefined });
-                        this.state.errors.hspPatientStatus = 'Please enter valid Patient Status';
+                        this.setState({ hspPatientStatus: undefined, errorHspPatientStatus: 'Please enter valid Patient Status' });
                     }
                     else {
-                        this.state.errors.hspPatientStatus = '';
+                        this.setState({ errorHspPatientStatus: '' });
                     }
                 }
                 else {
-                    this.setState({ hspPatientStatus: '' });
-                    this.state.errors.hspPatientStatus = 'Required';
+                    this.setState({ hspPatientStatus: '', errorHspPatientStatus: 'Required' });
                 }
                 break;
+            default: break;
         }
     }
     admissionDate(value) {
@@ -195,7 +180,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hsptotalPatients" id="hsptotalPatients" defaultValue="33" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hsptotalPatients}</span>
+                                <span className="error-msg">{this.state.errorHsptotalPatients}</span>
 
                             </Grid>
                         </Grid>
@@ -256,7 +241,7 @@ class hopitalDefaultComponent extends React.Component {
                                         <span style={{ fontSize: '13px', paddingLeft: '1%' }}> 15L/Cylinder</span>
                                     </div>
                                 </div>
-                                <span className="error-msg">{this.state.errors.hspOxygenAvail}</span>
+                                <span className="error-msg">{this.state.errorHspOxygenAvail}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="GridSpacing" >
@@ -292,7 +277,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspPatientName" id="hspPatientName" defaultValue="Rahul Mathur" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspPatientName}</span>
+                                <span className="error-msg">{this.state.errorHspPatientName}</span>
 
                             </Grid>
                         </Grid>
@@ -303,7 +288,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspPatientId" id="hspPatientId" defaultValue="78954" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspPatientId}</span>
+                                <span className="error-msg">{this.state.errorHspPatientId}</span>
 
                             </Grid>
                         </Grid>
@@ -314,7 +299,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspPatientAge" id="hspPatientAge" defaultValue="25" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspPatientAge}</span>
+                                <span className="error-msg">{this.state.errorHspPatientAge}</span>
 
                             </Grid>
                         </Grid>
@@ -325,7 +310,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspPatientAadhar" id="hspPatientAadhar" defaultValue="15897526956" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspPatientAadhar}</span>
+                                <span className="error-msg">{this.state.errorHspPatientAadhar}</span>
 
                             </Grid>
                         </Grid>
@@ -351,7 +336,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspAdmissionDetail" id="hspAdmissionDetail" defaultValue="Covid Positive, Ref By Dr Jatin" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspAdmissionDetail}</span>
+                                <span className="error-msg">{this.state.errorHspAdmissionDetail}</span>
 
                             </Grid>
                         </Grid>
@@ -376,7 +361,7 @@ class hopitalDefaultComponent extends React.Component {
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
                                 <input type="text" name="hspPatientStatus" id="hspPatientStatus" defaultValue="Recovered" className="form-control" onChange={this.handleChange} />
-                                <span className="error-msg">{this.state.errors.hspPatientStatus}</span>
+                                <span className="error-msg">{this.state.errorHspPatientStatus}</span>
 
                             </Grid>
                         </Grid>
