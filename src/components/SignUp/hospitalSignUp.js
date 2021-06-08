@@ -94,7 +94,7 @@ class HospitalSignUp extends React.Component {
 
             case 'contactNum':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^([0-9 ]+)$/)) {
+                    if (!value.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
                         this.setState({ contactNum: undefined });
                         this.state.errors.contactNum = 'Please enter Valid Contact Number';
                     }
@@ -193,7 +193,7 @@ class HospitalSignUp extends React.Component {
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[0-9]/)) {
+                    if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
                         this.setState({ pinCode: undefined });
                         this.state.errors.pinCode = 'Please enter valid Pin Code ';
                     }

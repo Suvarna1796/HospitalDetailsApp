@@ -57,7 +57,7 @@ class hopitalDefaultComponent extends React.Component {
                 break;
             case 'hspOxygenAvail':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$/)) {
+                    if (!value.match(/^(?:[0-9]|[a-zA-Z ]+[0-9])[a-zA-Z0-9 ]*$/i)) {
                         this.setState({ hspOxygenAvail: undefined });
                         this.state.errors.hspOxygenAvail = 'Please enter valid number';
                     }
@@ -179,7 +179,7 @@ class hopitalDefaultComponent extends React.Component {
 
         return (
             <div>
-                <Header title="Hospital Dashboard" search={value===0?"pateintName": value===1?"pateintId":''}/>
+                <Header title="Hospital Dashboard" search={value === 0 ? "pateintName" : value === 1 ? "pateintId" : ''} />
                 <div><br /></div>
                 <div className="publicTabs ">
                     <Tabs className="TabIndicator" centered value={value} onChange={this.handleTabChange} >
@@ -249,13 +249,14 @@ class hopitalDefaultComponent extends React.Component {
                                 <label className="SelectLabel"  >Oxygen Availability</label>
                             </Grid>
                             <Grid item >&emsp;</Grid>
-                            <Grid item xs={5} style={{ display: "flex" }}>
-                                <input type="text" name="hspOxygenAvail" id="hspOxygenAvail" defaultValue="200 Cylinders" className="form-control" onChange={this.handleChange} />
-                                <div style={{ flexGrow: " 1" }}>
-                                    <span style={{ fontSize: '13px', paddingLeft: '1%' }}> 15L/Cylinder</span>
+                            <Grid item xs={5} >
+                                <div style={{ display: "flex" }}>
+                                    <input type="text" name="hspOxygenAvail" id="hspOxygenAvail" defaultValue="200 Cylinders" className="form-control" onChange={this.handleChange} />
+                                    <div style={{ flexGrow: " 1" }}>
+                                        <span style={{ fontSize: '13px', paddingLeft: '1%' }}> 15L/Cylinder</span>
+                                    </div>
                                 </div>
                                 <span className="error-msg">{this.state.errors.hspOxygenAvail}</span>
-
                             </Grid>
                         </Grid>
                         <Grid container className="GridSpacing" >
@@ -263,14 +264,16 @@ class hopitalDefaultComponent extends React.Component {
                                 <label className="SelectLabel" >Medicine Status</label>
                             </Grid>
                             <Grid item >&emsp;</Grid>
-                            <Grid item xs={5} style={{ display: "flex" }}>
-                                <select className="form-control" id="hspMedicalStatus" name="hspMedicalStatus" >
-                                    <option value="1">Remedsvir</option>
-                                    <option value="2">Fabiflu</option>
-                                    <option value="3">Covaxin</option>
-                                </select>
-                                <div style={{ flexGrow: " 1" }}>
-                                    <span style={{ fontSize: '13px', paddingLeft: '1%' }}> Doses</span>
+                            <Grid item xs={5} >
+                                <div style={{ display: "flex" }}>
+                                    <select className="form-control" id="hspMedicalStatus" name="hspMedicalStatus" >
+                                        <option value="1">Remedsvir</option>
+                                        <option value="2">Fabiflu</option>
+                                        <option value="3">Covaxin</option>
+                                    </select>
+                                    <div style={{ flexGrow: " 1" }}>
+                                        <span style={{ fontSize: '13px', paddingLeft: '1%' }}> Doses</span>
+                                    </div>
                                 </div>
                                 <span className="error-msg">{this.state.errors.hspMedicalStatus}</span>
 

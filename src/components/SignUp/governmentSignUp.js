@@ -117,9 +117,9 @@ class GovernmentSignUp extends React.Component {
                 break;
             case 'corpMailAdd':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
+                    if (!value.match(/^[a-zA-Z0-9._%/+*-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,5}|[a-zA-z]{2,5}\.[a-zA-Z]{2,5})$/)) {
                         this.setState({ corpMailAdd: undefined });
-                        this.state.errors.corpMailAdd = 'Corporate Mail Address should be alphanumeric and Special Character';
+                        this.state.errors.corpMailAdd = 'Please enter valid mail address';
                     }
                     else {
                         this.state.errors.corpMailAdd = '';
@@ -254,7 +254,7 @@ class GovernmentSignUp extends React.Component {
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[0-9]/)) {
+                    if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
                         this.setState({ pinCode: undefined });
                         this.state.errors.pinCode = 'Please enter valid Pin Code ';
                     }
@@ -336,7 +336,7 @@ class GovernmentSignUp extends React.Component {
                                 <TextField
                                     id="filled-setPassword-input"
                                     label="Set Password"
-                                    type="text"
+                                    type="password"
                                     variant="filled"
                                     autoComplete="false"
                                     fullWidth={true}
@@ -352,7 +352,7 @@ class GovernmentSignUp extends React.Component {
                                 <TextField
                                     id="filled-cnfPassword-input"
                                     label="Confirm Password"
-                                    type="text"
+                                    type="password"
                                     variant="filled"
                                     autoComplete="false"
                                     fullWidth={true}

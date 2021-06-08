@@ -118,7 +118,7 @@ class PublicUserSignUp extends React.Component {
                 break;
             case 'mobileNumber':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^([0-9 ]+)$/)) {
+                    if (!value.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
                         this.setState({ mobileNumber: undefined });
                         this.state.errors.mobileNumber = 'Please enter Valid Mobile Number';
                     }
@@ -134,9 +134,9 @@ class PublicUserSignUp extends React.Component {
 
             case 'mailAdd':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'\/-]+$/)) {
+                    if (!value.match(/^[a-zA-Z0-9._%/+*-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,5}|[a-zA-z]{2,5}\.[a-zA-Z]{2,5})$/)) {
                         this.setState({ mailAdd: undefined });
-                        this.state.errors.mailAdd = ' Mail Address should be alphanumeric and Special Character';
+                        this.state.errors.mailAdd = ' Please enter valid mail address';
                     }
                     else {
                         this.state.errors.mailAdd = '';
@@ -226,7 +226,7 @@ class PublicUserSignUp extends React.Component {
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[0-9]/)) {
+                    if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
                         this.setState({ pinCode: undefined });
                         this.state.errors.pinCode = 'Please enter valid Pin Code ';
                     }
@@ -323,7 +323,7 @@ class PublicUserSignUp extends React.Component {
                                 <TextField
                                     id="filled-setPassword-input"
                                     label="Set Password"
-                                    type="text"
+                                    type="password"
                                     variant="filled"
                                     autoComplete="false"
                                     fullWidth={true}
@@ -339,7 +339,7 @@ class PublicUserSignUp extends React.Component {
                                 <TextField
                                     id="filled-cnfPassword-input"
                                     label="Confirm Password"
-                                    type="text"
+                                    type="password"
                                     variant="filled"
                                     autoComplete="false"
                                     fullWidth={true}
