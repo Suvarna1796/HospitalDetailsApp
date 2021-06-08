@@ -49,25 +49,29 @@ class CryptoDashboard extends PureComponent {
                     <br />
                     <hr />
                     <Row >
-                        {/* <Col >
-                        <select >
-                            <option>Karnataka</option>
-                            <option>Delhi</option>
-                            <option>Maharastra</option>
-                            <option>Andhra pradesh</option>
-                        </select></Col> */}
-
-                        <Col md={5} >
-                            <ConfirmedChart />
-                            <ActiveChart />
-                            <RecoveredChart />
-                        </Col>
-                        <Col md={2}></Col>
-                        <Col md={5}>
-                            <TestedChart />
-                            <VacinatedChart />
-                            <DeceasedChart />
-                        </Col>
+                        <Row  className={"pl-0 pl-sm-0 pl-md-3 pl-lg-4 pl-xl-5"}>
+                            <Col>
+                                <select  style={{width:'200% ',height:'42px',border:'1px solid #DFDFDF'}} >
+                                    <option>Karnataka</option>
+                                    <option>Delhi</option>
+                                    <option>Maharastra</option>
+                                    <option>Andhra pradesh</option>
+                                </select>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={5} >
+                                <ConfirmedChart />
+                                <ActiveChart />
+                                <RecoveredChart />
+                            </Col>
+                            <Col md={2}></Col>
+                            <Col md={5}>
+                                <TestedChart />
+                                <VacinatedChart />
+                                <DeceasedChart />
+                            </Col>
+                        </Row>
                     </Row>
                     <br />
                     <hr />

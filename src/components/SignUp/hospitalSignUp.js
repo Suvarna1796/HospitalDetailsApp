@@ -293,7 +293,7 @@ class HospitalSignUp extends React.Component {
                         <Grid container className="formContainer " justify="center">
                             <Grid item xs={8}>
 
-                                <select className="form-control" name="hospType" onChange={this.handleChange}>
+                                <select  style={{width:'100% ',height:'42px',border:'1px solid #DFDFDF'}}  name="hospType" onChange={this.handleChange}>
                                     {/* <option  disabled>Choose a salutation ...</option> */}
                                     <option value="">Hospital Type</option>
                                     {/* <option disabled selected hidden>Choose Gender...</option> */}
