@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import HeaderComponent from '../header'
+import HeaderComponent from '../header';
+import FooterComponent from '../footer';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -116,7 +117,7 @@ class LoginComponent extends React.Component {
         const { value } = this.state;
         return (
             <div >
-                <HeaderComponent  />
+                <HeaderComponent />
                 {value === 0 ? <div >
                     <Grid container className="AppBody" >
                         <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
@@ -175,7 +176,7 @@ class LoginComponent extends React.Component {
                                 </Grid>
                                 <Grid container justify="center"  >
                                     <Grid item xs={3} sm={3}>
-                                        <div style={{paddingRight:'10%'}}>
+                                        <div style={{ paddingRight: '10%' }}>
                                             <TextField
                                                 label="Captcha"
                                                 id="filled-size-small"
@@ -188,7 +189,7 @@ class LoginComponent extends React.Component {
                                         <span className="error-msg">{this.state.errorLoginCaptcha}</span>
                                     </Grid>
                                     <Grid item xs={3} sm={3} >
-                                        <ClientCaptcha captchaCode={this.setCode} height="48"/>
+                                        <ClientCaptcha captchaCode={this.setCode} height={48} />
                                     </Grid>
 
                                 </Grid>
@@ -210,22 +211,25 @@ class LoginComponent extends React.Component {
                         </Grid>
                     </div>
                 </div> :
-                    <Grid container style={{ paddingTop: '18%' }} >
-                        <Grid item xs={5} style={{ textAlign: 'right' }}>
-                            <label className="SelectLabel" >signup as </label>
-                        </Grid>&emsp;
+                    <div style={{height:'100%',width:'100%'}}>
+                        <Grid container style={{ paddingTop: '18%' }} >
+                            <Grid item xs={5} style={{ textAlign: 'right' }}>
+                                <label className="SelectLabel" >signup as </label>
+                            </Grid>&emsp;
                  <Grid item  >:</Grid>&emsp;
                  <Grid item xs={4}>
-                            <select className="form-control" id="publicbedsSelection" name="publicbedsSelection" onChange={this.handleSelection}>
-                                <option >Select</option>
+                                <select className="form-control" id="publicbedsSelection" name="publicbedsSelection" onChange={this.handleSelection}>
+                                    <option >Select</option>
 
-                                <option value="governmentSignUp">Government Employee</option>
-                                <option value="publicUserSignUp">Public User</option>
-                                <option value="hospitalSignUp">Hospital</option>
-                            </select>
+                                    <option value="governmentSignUp">Government Employee</option>
+                                    <option value="publicUserSignUp">Public User</option>
+                                    <option value="hospitalSignUp">Hospital</option>
+                                </select>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </div>
                 }
+                <FooterComponent name="login"/>
             </div>
         );
     }

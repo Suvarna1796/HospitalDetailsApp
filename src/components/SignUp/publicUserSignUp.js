@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
+import FooterComponent from '../footer';
 
 class PublicUserSignUp extends React.Component {
     constructor(props) {
@@ -424,6 +425,7 @@ class PublicUserSignUp extends React.Component {
                         </Grid>
                     </Container>
                 </div>
+                <FooterComponent />
             </div>
         )
     }

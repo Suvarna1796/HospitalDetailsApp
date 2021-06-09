@@ -13,7 +13,8 @@ import DeceasedChart from './deceasedLineChart';
 import VacinatedChart from './vacinatedLineChart';
 import TestedChart from './testedLineChart';
 import TableMap from './detailTable';
-import HeaderComponent from '../header'
+import HeaderComponent from '../header';
+import FooterComponent from '../footer';
 // import { Select } from '@material-ui/core';
 // import Select from 'react-select';
 
@@ -77,6 +78,7 @@ class CryptoDashboard extends PureComponent {
 
                     </Row>
                 </Container>
+                <FooterComponent />
             </div>
         );
     }

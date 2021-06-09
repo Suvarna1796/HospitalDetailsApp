@@ -7,7 +7,7 @@ import copy from "copy-to-clipboard";
 import PublicDashboard3 from './publicDashboard3';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import FooterComponent from '../footer';
 
 var rows = [
     { key: 'name', label: 'Name' },
@@ -61,9 +61,9 @@ class PublicDashboard2 extends React.Component {
         console.log(rows, "rows in 2 render", this.state.viewDetailsFlag)
         return (
             <div >
-                <HeaderComponent  />
+                <HeaderComponent />
 
-                {this.state.viewDetailsFlag === true ? <div><div style={{ paddingTop: '2%' }}> <ArrowBackIcon onClick={this.sample} /></div> <PublicDashboard3 data={this.state.viewdetails} > <input type="hidden" onChange={this.sample} /></PublicDashboard3></div> :
+                {this.state.viewDetailsFlag === true ? <div><div style={{ paddingTop: '1%' }}> <ArrowBackIcon onClick={this.sample} /></div> <PublicDashboard3 data={this.state.viewdetails} > <input type="hidden" onChange={this.sample} /></PublicDashboard3></div> :
                     <div>
                         <Grid container ><Grid></Grid></Grid>
                         <Grid container className="AppBody">
@@ -72,8 +72,8 @@ class PublicDashboard2 extends React.Component {
                             </Link>
                             <Grid item xs>
                             </Grid>
-                            <Grid item xs={6}>
-                                <TableComponent id="publicTable"
+                            <Grid item xs={8}>
+                                <TableComponent id="publicTable" className="publicTable"
                                     cols={cols} rows={rows}
                                     viewDetailsFlag={this.state.viewDetailsFlag}
                                     onViewDetail={this.handleOpenEditRow}
@@ -87,6 +87,7 @@ class PublicDashboard2 extends React.Component {
                     </div>}
                 {/* {this.props.showEditPlan || this.props.showViewPlan ? 
                     <EditRiskImpact dataObj={this.props.dataObj} view={this.props.view} oncancel={this.handleClose} /> : ''} */}
+                <FooterComponent name="login"/>
             </div>
         )
     }

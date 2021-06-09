@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import '../../App.css';
 import DatePicker from 'react-date-picker';
+import FooterComponent from '../footer';
 // import "react-datepicker/dist/react-datepicker.css";
 
 class hopitalDefaultComponent extends React.Component {
@@ -372,6 +373,7 @@ class hopitalDefaultComponent extends React.Component {
                         </Grid>
                     </div>}
                 </div>
+                <FooterComponent name="login"/>
             </div>
         )
     }

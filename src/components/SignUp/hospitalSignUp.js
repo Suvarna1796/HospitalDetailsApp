@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
-
+import FooterComponent from '../footer'
 class HospitalSignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -197,198 +197,201 @@ class HospitalSignUp extends React.Component {
     render() {
 
         return (
-            <div className="signUp">
-                <Header />
-                <Grid container className="AppBody" >
-                    <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
-                        Signup As Hospital
+            <div>
+                <div className="signUp">
+                    <Header />
+                    <Grid container className="AppBody" >
+                        <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
+                            Signup As Hospital
                         </Grid>
-                </Grid>
-                <div className="" style={{ paddingTop: '11px', paddingBottom: '1%' }}>
-                    <Container maxWidth="md" className="boxStyle" style={{ border: '4px solid #E8E8E8' }}>
-                        {/* signlkjlk */}
-                        <Tabs value={this.state.value} onChange={this.handleTabChange}
-                            indicatorColor="primary" textColor="primary"
-                            centered style={{ paddingBottom: '7px' }}>
-                            <Tab label="Login" />
-                            <Tab label="Signup" />
-                        </Tabs>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8} >
-                                <TextField
-                                    id="filled-hospName-input"
-                                    label="Hospital Name"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="hospName"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorhospName}</span>
-                            </Grid>
-
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-contactNum-input"
-                                    label="Enter Contact Number"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="contactNum"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorcontactNum}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-licenseNumber-input"
-                                    label="Enter License Number"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="licenseNumber"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorlicenseNumber}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-registartion-input"
-                                    label="Enter Registration Number"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="registartion"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorregistartion}</span>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-
-                                <select style={{ width: '100% ', height: '42px', border: '1px solid #DFDFDF' }} name="hospType" onChange={this.handleChange}>
-                                    {/* <option  disabled>Choose a salutation ...</option> */}
-                                    <option value="">Hospital Type</option>
-                                    {/* <option disabled selected hidden>Choose Gender...</option> */}
-
-                                    <option>Private</option>
-                                    <option>Government</option>
-                                    <option>Trust</option>
-                                    <option>Camp</option>
-                                    <option>Others</option>
-
-                                </select>
-                                <span className="error-msg">{this.state.errorsHospType}</span>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-address-input"
-                                    label="Enter Address"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="address"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorsAddress}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-city-input"
-                                    label="Enter City"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="city"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorsCity}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-gstate-input"
-                                    label="Enter State"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="gstate"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorsGstate}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify='center'>
-                            <Grid item xs={8}>
-                                <TextField
-                                    id="filled-pinCode-input"
-                                    label="Enter Pin Code"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="pinCode"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorsPinCode}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify='center'>
-                            <Grid item xs={4}>
-                                <div>
+                    </Grid>
+                    <div className="" style={{ paddingTop: '11px', paddingBottom: '1%' }}>
+                        <Container maxWidth="md" className="boxStyle" style={{ border: '4px solid #E8E8E8' }}>
+                            {/* signlkjlk */}
+                            <Tabs value={this.state.value} onChange={this.handleTabChange}
+                                indicatorColor="primary" textColor="primary"
+                                centered style={{ paddingBottom: '7px' }}>
+                                <Tab label="Login" />
+                                <Tab label="Signup" />
+                            </Tabs>
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8} >
                                     <TextField
-                                        label="Captcha"
-                                        id="filled-inputCaptcha-small"
-                                        variant="filled"
-                                        fullWidth={true}
+                                        id="filled-hospName-input"
+                                        label="Hospital Name"
                                         type="text"
-                                        name="inputCaptcha"
+                                        variant="filled"
                                         autoComplete="false"
+                                        fullWidth={true}
+                                        name="hospName"
                                         onChange={this.handleChange}
                                     />
-                                    <span className="error-msg">{this.state.errorCaptcha}</span>
-                                </div>
-                            </Grid>
-                            <Grid item xs={4} style={{ paddingLeft: '10px' }} >
-                                <ClientCaptcha captchaCode={this.setCode} />
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify='center'>
+                                    <span className="error-msg">{this.state.errorhospName}</span>
+                                </Grid>
 
-                            {this.state.SignUpValidation === true ? <span className='error-msg'>Please enter all fields</span> : ''}
-                        </Grid>
-                        <Grid container className="formContainer" justify="center">
-                            <Grid item xs={5}>
                             </Grid>
-                            <Grid item xs={7}>
-                                <Button variant="contained" className="save-btn" size="large" onClick={this.handleLogin} style={{ width: '25%', backgroundColor: '#1E2F50', color: '#FFFFFF' }}>
-                                    Signup
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-contactNum-input"
+                                        label="Enter Contact Number"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="contactNum"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorcontactNum}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-licenseNumber-input"
+                                        label="Enter License Number"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="licenseNumber"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorlicenseNumber}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-registartion-input"
+                                        label="Enter Registration Number"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="registartion"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorregistartion}</span>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+
+                                    <select style={{ width: '100% ', height: '42px', border: '1px solid #DFDFDF' }} name="hospType" onChange={this.handleChange}>
+                                        {/* <option  disabled>Choose a salutation ...</option> */}
+                                        <option value="">Hospital Type</option>
+                                        {/* <option disabled selected hidden>Choose Gender...</option> */}
+
+                                        <option>Private</option>
+                                        <option>Government</option>
+                                        <option>Trust</option>
+                                        <option>Camp</option>
+                                        <option>Others</option>
+
+                                    </select>
+                                    <span className="error-msg">{this.state.errorsHospType}</span>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-address-input"
+                                        label="Enter Address"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="address"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorsAddress}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-city-input"
+                                        label="Enter City"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="city"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorsCity}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify="center">
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-gstate-input"
+                                        label="Enter State"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="gstate"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorsGstate}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify='center'>
+                                <Grid item xs={8}>
+                                    <TextField
+                                        id="filled-pinCode-input"
+                                        label="Enter Pin Code"
+                                        type="text"
+                                        variant="filled"
+                                        autoComplete="false"
+                                        fullWidth={true}
+                                        name="pinCode"
+                                        onChange={this.handleChange}
+                                    />
+                                    <span className="error-msg">{this.state.errorsPinCode}</span>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify='center'>
+                                <Grid item xs={4}>
+                                    <div>
+                                        <TextField
+                                            label="Captcha"
+                                            id="filled-inputCaptcha-small"
+                                            variant="filled"
+                                            fullWidth={true}
+                                            type="text"
+                                            name="inputCaptcha"
+                                            autoComplete="false"
+                                            onChange={this.handleChange}
+                                        />
+                                        <span className="error-msg">{this.state.errorCaptcha}</span>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={4} style={{ paddingLeft: '10px' }} >
+                                    <ClientCaptcha captchaCode={this.setCode} />
+                                </Grid>
+                            </Grid>
+                            <Grid container className="formContainer " justify='center'>
+
+                                {this.state.SignUpValidation === true ? <span className='error-msg'>Please enter all fields</span> : ''}
+                            </Grid>
+                            <Grid container className="formContainer" justify="center">
+                                <Grid item xs={5}>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <Button variant="contained" className="save-btn" size="large" onClick={this.handleLogin} style={{ width: '25%', backgroundColor: '#1E2F50', color: '#FFFFFF' }}>
+                                        Signup
                                     </Button>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Container>
+                        </Container>
+                    </div>
                 </div>
+                <FooterComponent />
             </div>
         )
     }

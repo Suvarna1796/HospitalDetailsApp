@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
+import FooterComponent from '../footer';
 
 class GovernmentSignUp extends React.Component {
     constructor(props) {
@@ -249,7 +250,7 @@ class GovernmentSignUp extends React.Component {
     render() {
         return (
             <div className="signUp">
-                <Header  />
+                <Header />
                 <Grid container className="AppBody" >
                     <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
                         Signup As Government
@@ -478,6 +479,7 @@ class GovernmentSignUp extends React.Component {
                         </Grid>
                     </Container>
                 </div>
+                <FooterComponent />
             </div>
         )
     }

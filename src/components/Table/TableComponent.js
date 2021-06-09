@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import '../../App.css';
-import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
 
 class TableComponent extends React.Component {
     constructor(props) {
@@ -59,20 +59,20 @@ class TableComponent extends React.Component {
                         return <TableCell key={index_col}>{item[colData.key]}</TableCell>
                     }
                 }
-            return false;
+                return false;
             });
             if (this.props.viewDetailsFlag === false) {
                 return <TableRow key={index}>
                     {cells}
                     <TableCell style={{ width: '130px' }} >
-                        <Link to="" onClick={() => props.onViewDetail(item)} className="p-2" style={{ color: '#111111' }} >
+                        <Button onClick={() => props.onViewDetail(item)} className="tableBtn" style={{ fontWeight: '400' }} >
                             <u> ViewDetails</u>
-                        </Link>
+                        </Button>
                     </TableCell>
                     <TableCell>
-                        <Link to="" data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  >
-                            <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(item)} />  </Link>
-
+                        <Button data-toggle="tooltip" title="Click here to copy the Link" onClick={() => props.onShareDetail(item)}>
+                            <OpenInNewIcon className="yellowColor" />
+                        </Button>
                     </TableCell>
                 </TableRow>
             }

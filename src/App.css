@@ -1,9 +1,14 @@
 body {
   /* margin:8px; */
   font-family: 'Roboto', sans-serif;
-  font-size: 15px !important;
+  font-size: 14px !important;
+  height: 100% !important;
+  width: 100%;
 }
-
+html body #root{
+  height: 100% !important;
+  width: 100%!important;
+}
 .MuiToolbar-dense {
   min-height: 67px !important;
   background-color :#091D42 !important;
@@ -200,4 +205,33 @@ border: 0px !important;
 } */
 .dashboard div{
 padding-bottom: 10px;
+}
+.footer{
+  width: 100%;
+  /* top: 90%; */
+  position: absolute;
+  bottom:0 !important;
+}
+.footerClass{
+  right:0 !important;
+  width: 100% !important
+}
+.footerClass .MuiAppBar-colorPrimary{
+  color:#111 !important;
+  background-color: transparent !important;
+}
+.footerClass .MuiPaper-elevation4{
+  box-shadow: none !important;
+  padding-top: 2%;
+  right:0 !important
+}
+.tableBtn{
+  font-size: 14px !important;
+  color: #111111
+}
+@media (min-width: 1280px)
+{
+  .footerClass .MuiContainer-maxWidthLg {
+    max-width: 1520px;
+}
 }
