@@ -164,7 +164,7 @@ class hopitalDefaultComponent extends React.Component {
 
         return (
             <div>
-                <Header title="Hospital Dashboard" search={value === 0 ? "pateintName" : value === 1 ? "pateintId" : ''} />
+                <Header  search={value === 0 ? "pateintName" : value === 1 ? "pateintId" : ''} />
                 <div><br /></div>
                 <div className="publicTabs ">
                     <Tabs className="TabIndicator" centered value={value} onChange={this.handleTabChange} >

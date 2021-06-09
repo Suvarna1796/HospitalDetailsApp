@@ -17,11 +17,11 @@ class HeaderComponent extends React.Component {
                     <Toolbar variant="dense">
                         <IconButton edge="start" color="inherit" aria-label="menu">
                             {/* <FingerprintIcon /> */}
-                            <img src="./images/fingerPintIcon.png" alt=" " className="styleIcon" style={{width:'40px'}}/>
+                            <img src="./images/headerIcon.png" alt=" " className="styleIcon" width="50" />
 
                         </IconButton>
                         <Typography variant="h6" color="inherit">
-                            {this.props.title}
+                            Government Of India
                         </Typography>
 
                         <div style={{ flexGrow: 1 }}> </div>

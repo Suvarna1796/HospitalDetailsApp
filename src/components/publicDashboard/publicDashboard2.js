@@ -61,7 +61,7 @@ class PublicDashboard2 extends React.Component {
         console.log(rows, "rows in 2 render", this.state.viewDetailsFlag)
         return (
             <div >
-                <HeaderComponent title='Public Dashboard' />
+                <HeaderComponent  />
 
                 {this.state.viewDetailsFlag === true ? <div><div style={{ paddingTop: '2%' }}> <ArrowBackIcon onClick={this.sample} /></div> <PublicDashboard3 data={this.state.viewdetails} > <input type="hidden" onChange={this.sample} /></PublicDashboard3></div> :
                     <div>

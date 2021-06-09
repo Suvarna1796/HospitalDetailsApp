@@ -116,7 +116,7 @@ class LoginComponent extends React.Component {
         const { value } = this.state;
         return (
             <div >
-                <HeaderComponent title='Uoodmaish' />
+                <HeaderComponent  />
                 {value === 0 ? <div >
                     <Grid container className="AppBody" >
                         <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
@@ -175,7 +175,7 @@ class LoginComponent extends React.Component {
                                 </Grid>
                                 <Grid container justify="center"  >
                                     <Grid item xs={3} sm={3}>
-                                        <div>
+                                        <div style={{paddingRight:'10%'}}>
                                             <TextField
                                                 label="Captcha"
                                                 id="filled-size-small"
@@ -188,7 +188,7 @@ class LoginComponent extends React.Component {
                                         <span className="error-msg">{this.state.errorLoginCaptcha}</span>
                                     </Grid>
                                     <Grid item xs={3} sm={3} >
-                                        <ClientCaptcha captchaCode={this.setCode} />
+                                        <ClientCaptcha captchaCode={this.setCode} height="48"/>
                                     </Grid>
 
                                 </Grid>

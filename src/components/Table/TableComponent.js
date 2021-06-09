@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import '../../App.css';
+import { Link } from 'react-router-dom'
 
 class TableComponent extends React.Component {
     constructor(props) {
@@ -46,7 +47,6 @@ class TableComponent extends React.Component {
         var props = this.props;
 
         return rows.map((item, index) => {
-            // console.log(item, this.props.viewDetailsFlag, "item");
             // handle the column data within each row
             var cells = cols.map(function (colData, index_col) {
                 // colData.key might be "firstName"
@@ -59,18 +59,19 @@ class TableComponent extends React.Component {
                         return <TableCell key={index_col}>{item[colData.key]}</TableCell>
                     }
                 }
+            return false;
             });
             if (this.props.viewDetailsFlag === false) {
                 return <TableRow key={index}>
                     {cells}
                     <TableCell style={{ width: '130px' }} >
-                        <a onClick={() => props.onViewDetail(item)} className="p-2" style={{ color: '#111111' }} >
+                        <Link to="" onClick={() => props.onViewDetail(item)} className="p-2" style={{ color: '#111111' }} >
                             <u> ViewDetails</u>
-                        </a>
+                        </Link>
                     </TableCell>
                     <TableCell>
-                        <a data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  >
-                            <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(item)} />  </a>
+                        <Link to="" data-toggle="tooltip" title="Click here to copy the Link" className="p-2"  >
+                            <OpenInNewIcon className="yellowColor" onClick={() => props.onShareDetail(item)} />  </Link>
 
                     </TableCell>
                 </TableRow>
@@ -80,7 +81,6 @@ class TableComponent extends React.Component {
                     {cells}
                 </TableRow>
             }
-
         });
     }
     render() {

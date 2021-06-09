@@ -22,7 +22,7 @@ class CryptoDashboard extends PureComponent {
     render() {
         return (
             <div>
-                <HeaderComponent title='Government Dashboard' />
+                <HeaderComponent  />
 
                 <Container >
                     <Row>

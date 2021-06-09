@@ -225,7 +225,7 @@ class PublicUserSignUp extends React.Component {
     render() {
         return (
             <div className="signUp">
-                <Header title='Uoodmaish' />
+                <Header  />
                 <Grid container className="AppBody" >
                     <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
                         Signup As Public User

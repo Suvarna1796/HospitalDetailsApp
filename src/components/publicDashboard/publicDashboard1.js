@@ -13,7 +13,7 @@ class PublicDashboard1 extends React.Component {
     render() {
         return (
             <div>
-                <HeaderComponent title='Public Dashboard' />
+                <HeaderComponent />
                 <Grid container >
                     <Grid item xs={4}>
                     </Grid>
