@@ -1,15 +1,35 @@
 import React from 'react';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container';
 import '../../App.css';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
+
+var locationPosition;
 
 class PublicDashboard1 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            locationFlag: false, checkboxValue: false
+        }
+        this.detectLocation = this.detectLocation.bind(this);
+        this.setCheckboxValue = this.setCheckboxValue.bind(this);
+    }
+    setCheckboxValue() {
+        this.setState({ checkboxValue: !this.state.checkboxValue, locationFlag: false })
+    }
+    detectLocation() {
+        if (this.state.checkboxValue === true) {
+            this.setState({ locationFlag: false });
+            
+        } else {
+            this.setState({ locationFlag: true })
+        }
+    }
 
     render() {
         return (
@@ -72,16 +92,37 @@ class PublicDashboard1 extends React.Component {
                                 <option>Sector 3</option>
                             </select>
                             <br />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                }
-                                label="search for nearby Hospitals"
-                            />
                             <Grid container>
+                                <Grid item xs={5}>
+                                    <input
+                                        checked={this.state.checkboxValue}
+                                        onChange={this.setCheckboxValue}
+                                        type="checkbox"
+                                    />&nbsp;
+                                    <label>
+                                        search for nearby hospitals
+                                    </label>
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="center">
+                                <Grid item xs={7} style={{ color: '#878787' }}>
+                                    OR
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="center">
+                                <Grid item xs={9}>
+                                    <Button className="tableBtn" onClick={this.detectLocation} >
+                                        <MyLocationIcon /> &nbsp;Detect Location
+                                         </Button>
+                                </Grid>
+                            </Grid>
+                            {this.state.locationFlag === true ?
+                                <Grid container justify="center">
+                                    <Grid item xs={11}>
+                                        <DetectLocationComponent />
+                                    </Grid>
+                                </Grid> : ''}
+                            <Grid container style={{ paddingTop: '2%' }} justify="center">
                                 <Grid item xs={1}>
                                 </Grid>
                                 <Grid item xs={5}>
@@ -105,6 +146,24 @@ class PublicDashboard1 extends React.Component {
                 <FooterComponent />
             </div>
 
+        )
+    }
+}
+class DetectLocationComponent extends React.Component {
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(locationPosition, "locationPosition in mount ")
+            console.log("position", position)
+            locationPosition = position;
+            console.log(locationPosition, "after assign in mount")
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+        });
+    }
+    render() {
+        console.log(locationPosition, "render")
+        return (
+            <div>{locationPosition ? '' : <div>Please allow the location access,to get your location</div>}</div>
         )
     }
 }

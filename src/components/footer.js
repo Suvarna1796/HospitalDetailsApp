@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container';
 export default class FooterComponent extends React.Component {
 
     render() {
-        console.log(this.props, "in footer")
         return (
             <div className="footerClass">
                 {(this.props.name === 'login') ?
