@@ -73,8 +73,7 @@ class GovernmentDashboardTable extends React.Component {
           <span> <NotificationsIcon style={{ transform: 'scale(0.8)' }} /><RestoreIcon style={{ transform: 'scale(0.8)' }} /></span>
         </div>
         <div>
-          <Card md={12} xl={6} lg={6} xs={12}>
-            {/* <CardBody  > */}
+          <Card md={12} xl={12} lg={12} xs={12} style={{position:'relative'}}>
             <div style={{ backgroundColor: '#E8E8E8', border: '1px solid #E8E8E8', padding: '10px', color: '#707070' }}>
               <h5 >
                 Overall Report
@@ -84,7 +83,6 @@ class GovernmentDashboardTable extends React.Component {
               cols={this.state.cols} rows={rows}
             >
             </TableComponent>
-            {/* </CardBody> */}
           </Card>
         </div>
 
