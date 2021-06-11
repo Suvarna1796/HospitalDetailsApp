@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
+import { Card } from 'reactstrap';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -127,9 +128,10 @@ class LoginComponent extends React.Component {
                     <div >
 
                         <Grid container className="AppBody" >
-                            <Grid item xs={3} >
+                            <Grid item xs={2} >
                             </Grid>
-                            <Grid item xs={6} className="LoginTabs boxStyle" >
+                            <Grid item xs={8} className="LoginTabs ">
+                                <Card>
                                 <br />
                                 <Tabs className="TabIndicator" TabIndicatorProps={{style: {backgroundColor: "#1E2F50"}}} value={value} onChange={this.handleTabChange} style={{ paddingLeft: '30%' }}>
                                     <Tab label="Login" className="tab1" />
@@ -207,6 +209,7 @@ class LoginComponent extends React.Component {
                                     </Grid>
                                 </Grid>
                                 <br />
+                                </Card>
                             </Grid>
                         </Grid>
                     </div>
