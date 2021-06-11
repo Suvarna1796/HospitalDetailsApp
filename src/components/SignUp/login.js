@@ -131,7 +131,7 @@ class LoginComponent extends React.Component {
                             </Grid>
                             <Grid item xs={6} className="LoginTabs boxStyle" >
                                 <br />
-                                <Tabs className="TabIndicator" value={value} onChange={this.handleTabChange} style={{ paddingLeft: '30%' }}>
+                                <Tabs className="TabIndicator" TabIndicatorProps={{style: {backgroundColor: "#1E2F50"}}} value={value} onChange={this.handleTabChange} style={{ paddingLeft: '30%' }}>
                                     <Tab label="Login" className="tab1" />
                                     <Tab label="SignUp" className="tab2" >
                                     </Tab>

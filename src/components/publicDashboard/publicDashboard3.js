@@ -31,7 +31,7 @@ class PublicDashboard3 extends React.Component {
         console.log("this.props in 3", this.props);
         return (
             <div className="publicTabs ">
-                <Tabs className="TabIndicator" centered value={value} onChange={this.handleChange} >
+                <Tabs className="TabIndicator" centered value={value} TabIndicatorProps={{style: {backgroundColor: "#1E2F50"}}} onChange={this.handleChange} >
                     <Tab label="Basic Details" className="tab1" />
                     <Tab label="Real Time Details" className="tab2" />
                 </Tabs>
