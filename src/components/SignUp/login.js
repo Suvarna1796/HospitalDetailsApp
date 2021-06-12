@@ -4,14 +4,14 @@ import "react-client-captcha/dist/index.css"
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
 import { Card } from 'reactstrap';
-import signupLogin from '../../actions/signUp.actions';
+import signupUserLogin, { signupGovernmentLogin } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
 
 class LoginComponent extends React.Component {
@@ -24,24 +24,33 @@ class LoginComponent extends React.Component {
             errors: [],
             loginId: '',
             loginPwd: '',
-            loginMailId: '',
-            SignUpValidation: false
+            SignUpValidation: false,
+            loginUserFlag: false,
+            loginSelect: true,
+            loginSelectValue: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleSelection = this.handleSelection.bind(this);
-
+        this.handleLoginSelection = this.handleLoginSelection.bind(this);
+    }
+    /*On select of login as user */
+    handleLoginSelection(event) {
+        if (event.target.value) {
+            console.log(event.target.value, "in login slection");
+            this.setState({ loginSelectValue: event.target.value, loginUserFlag: true, loginSelect: false });
+        } else {
+            this.setState({ loginSelectValue: '', loginUserFlag: false, loginSelect: true });
+        }
     }
 
-    /*On selection navigate to another page */
+    /*On selct of signup as navigate to another page */
     handleSelection(event) {
         console.log(event.target.value)
         this.props.history.push(`/${event.target.value}`);
 
     }
-
-
 
     /*to capture the onchange input values*/
     handleChange(event) {
@@ -67,19 +76,6 @@ class LoginComponent extends React.Component {
                     this.setState({ loginId: '', errorLoginId: 'Required' });
                 }
                 break;
-            case 'loginMailId':
-                if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[a-zA-Z0-9._%/+*-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,5}|[a-zA-z]{2,5}\.[a-zA-Z]{2,5})$/)) {
-                        this.setState({ loginMailId: undefined, errorMailId: 'Please enter valid Username' });
-                    }
-                    else {
-                        this.setState({ errorMailId: '' });
-                    }
-                }
-                else {
-                    this.setState({ loginMailId: '', errorMailId: 'Required' });
-                }
-                break;
             case 'loginPwd':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
@@ -97,9 +93,9 @@ class LoginComponent extends React.Component {
                 break;
         }
     }
+    //submitting the form and api call
     handleLogin() {
-        console.log('this.state.loginMailId: ', this.state.loginMailId);
-        if (this.state.loginId === '' || this.state.loginPwd === '' || this.state.loginMailId === '') {
+        if (this.state.loginId === '' || this.state.loginPwd === '') {
             this.setState({ SignUpValidation: true })
         } else {
             this.setState({ SignUpValidation: false })
@@ -119,16 +115,25 @@ class LoginComponent extends React.Component {
             this.setState({ errorLoginCaptcha: 'Required' });
         }
 
-        console.log('this.state.SignUpValidation: ', this.state.SignUpValidation);
-        if (this.state.loginId !== undefined && this.state.loginPwd !== undefined && this.state.loginMailId !== undefined && (this.state.captchaCode === this.state.inputCaptcha)) {
+        if (this.state.loginId !== undefined && this.state.loginPwd !== undefined && (this.state.captchaCode === this.state.inputCaptcha)) {
             console.log("in login btn");
             var data = {
                 "username": this.state.loginId,
-                "password": this.state.loginPwd,
-                "email": this.state.loginMailId
+                "password": this.state.loginPwd
             }
-            console.log(data);
-            this.props.dispatch(signupLogin(data));
+            if (this.state.loginSelectValue === "governmentUser") {
+                console.log(data, "gvt ");
+                this.props.dispatch(signupGovernmentLogin(data));
+
+            }
+            else if (this.state.loginSelectValue === "publicUser") {
+                console.log(data, "public user");
+                this.props.dispatch(signupUserLogin(data));
+                console.log(this.props)
+            }
+            else if (this.state.loginSelectValue === "hospitalUser") {
+                console.log(data, "hospitalUser user");
+            }
         }
     }
 
@@ -136,7 +141,7 @@ class LoginComponent extends React.Component {
     setCode = captchaCode => {
         this.setState({ captchaCode })
     }
-    /*to get tab value*/
+    /*to get tab value for display*/
     handleTabChange(event, tabvalue) {
         this.setState({
             value: tabvalue,
@@ -144,30 +149,37 @@ class LoginComponent extends React.Component {
     }
     render() {
         const { value } = this.state;
+        // console.log(this.props, "in render")
+        if (this.props.userLogin) {
+            if (this.props.userLogin.publicUserLogin) {
+               return  <Redirect to='/publicDashboard1' />
+            }
+         if(this.props.userLogin.gvtUserLogin){
+               return <Redirect to='/governmentDashboard' />
+            }
+        }
         return (
             <div >
                 <HeaderComponent />
-{/* 
-                <div style={{ height: '100%', width: '100%' }}>
-                        <Grid container style={{ paddingTop: '18%' }} >
-                            <Grid item xs={5} style={{ textAlign: 'right' }}>
-                                <label className="SelectLabel" >login as </label>
-                            </Grid>&emsp;
-                 <Grid item  >:</Grid>&emsp;
-                 <Grid item xs={4}>
-                                <select className="form-control" id="publicbedsSelection" name="publicbedsSelection" onChange={this.handleSelection}>
-                                    <option >Select</option>
-
-                                    <option value="governmentSignUp">Government Employee</option>
-                                    <option value="publicUserSignUp">Public User</option>
-                                    <option value="hospitalSignUp">Hospital</option>
-                                </select>
-                            </Grid>
+                {this.state.loginUserFlag === false && this.state.loginSelect === true ? <div style={{ height: '100%', width: '100%' }}>
+                    <Grid container style={{ paddingTop: '18%' }} >
+                        <Grid item xs={5} style={{ textAlign: 'right' }}>
+                            <label className="SelectLabel" >login as </label>
+                        </Grid>&emsp;
+                        <Grid item  >:</Grid>&emsp;
+                        <Grid item xs={4}>
+                            <select className="form-control" id="publicbedsSelection" name="publicbedsSelection" onChange={this.handleLoginSelection}>
+                                <option value="">Select</option>
+                                <option value="governmentUser">Government Employee</option>
+                                <option value="publicUser">Public User</option>
+                                <option value="hospitalUser">Hospital</option>
+                            </select>
                         </Grid>
-                    </div>
-                 */}
+                    </Grid>
+                </div> : ''}
 
-                {value === 0 ? <div >
+
+                {value === 0 && this.state.loginUserFlag === true ? <div >
                     <Grid container className="AppBody" >
                         <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
                             Welcome To Uoodmaish
@@ -201,21 +213,6 @@ class LoginComponent extends React.Component {
                                                 onChange={this.handleChange}
                                             />
                                             <span className="error-msg">{this.state.errorLoginId}</span>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container className="formContainer " justify="center" alignItems="center">
-                                        <Grid item xs={6}>
-                                            <TextField
-                                                id="filled-loginMail-input"
-                                                label="Enter Mail Address"
-                                                type="text"
-                                                variant="filled"
-                                                autoComplete="false"
-                                                fullWidth={true}
-                                                name="loginMailId"
-                                                onChange={this.handleChange}
-                                            />
-                                            <span className="error-msg">{this.state.errorMailId}</span>
                                         </Grid>
                                     </Grid>
                                     <Grid container className="formContainer" justify="center" alignItems="center">
@@ -266,7 +263,7 @@ class LoginComponent extends React.Component {
                                         <Grid item xs={4} >
                                             <Button variant="contained" className="save-btn" size="large" onClick={this.handleLogin} style={{ width: '50%', backgroundColor: '#1E2F50', color: '#FFFFFF' }}>
                                                 Login
-                                    </Button>
+                                            </Button>
                                         </Grid>
                                     </Grid>
                                     <br />
@@ -274,14 +271,14 @@ class LoginComponent extends React.Component {
                             </Grid>
                         </Grid>
                     </div>
-                </div> :
+                </div> : <div>{value === 1 ?
                     <div style={{ height: '100%', width: '100%' }}>
                         <Grid container style={{ paddingTop: '18%' }} >
                             <Grid item xs={5} style={{ textAlign: 'right' }}>
                                 <label className="SelectLabel" >signup as </label>
                             </Grid>&emsp;
-                 <Grid item  >:</Grid>&emsp;
-                 <Grid item xs={4}>
+                            <Grid item  >:</Grid>&emsp;
+                            <Grid item xs={4}>
                                 <select className="form-control" id="publicbedsSelection" name="publicbedsSelection" onChange={this.handleSelection}>
                                     <option >Select</option>
 
@@ -291,7 +288,7 @@ class LoginComponent extends React.Component {
                                 </select>
                             </Grid>
                         </Grid>
-                    </div>
+                    </div> : ''}</div>
                 }
                 <FooterComponent name="login" />
             </div>
@@ -302,10 +299,8 @@ class LoginComponent extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    console.log('state: ', state);
-
-    return {
-        publicUser: state,
+        return {
+        userLogin: state.PublicUserReducer,
     }
 }
-export default connect(mapStateToProps)(LoginComponent);
+export default withRouter(connect(mapStateToProps)(LoginComponent));

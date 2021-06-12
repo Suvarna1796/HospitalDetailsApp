@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_API_URL } from '../configuration';
 
-//user login
-export default function signupLogin(data) {
+//public user login
+export default function signupUserLogin(data) {
     console.log(data);
     return function action(dispatch) {
         const request = axios.post(`${BASE_API_URL}user/login`,
@@ -27,6 +27,37 @@ const ErrPublicLogin = (data) => {
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
     return {
         type: PUBLIC_LOGIN,
+        data: data
+    }
+}
+
+
+//Government user login
+export function signupGovernmentLogin(data) {
+    console.log(data);
+    return function action(dispatch) {
+        const request = axios.post(`https://covid-government-dashboard.herokuapp.com/user/login`,
+            data
+        );
+        return request.then(
+            response => dispatch(SuccessGvtLogin(response.data)),
+            err => dispatch(ErrGvtLogin(err.response.data.message))
+        );
+    }
+}
+const SuccessGvtLogin = (data) => {
+    console.log(data);
+    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
+    return {
+        type: GOVERNMENT_LOGIN,
+        data: data
+    }
+}
+const ErrGvtLogin = (data) => {
+    console.log(data);
+    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
+    return {
+        type: GOVERNMENT_LOGIN,
         data: data
     }
 }
