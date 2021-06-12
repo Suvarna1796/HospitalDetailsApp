@@ -8,6 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
 import FooterComponent from '../footer';
+import { signupGovernment } from '../../actions/signUp.actions';
+import { connect } from 'react-redux';
+import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
+import '../../App.css'
 
 class GovernmentSignUp extends React.Component {
     constructor(props) {
@@ -15,13 +19,22 @@ class GovernmentSignUp extends React.Component {
         this.state = {
             value: 1,
             captchaCode: '',
-            errors: [],
             SignUpValidation: false,
-
+            errorCaptcha: '',
+            errorCnfPassword: '',
+            cnfPassword: '',
+            toggle: false,
+            modal: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.toggle = this.toggle.bind(this);
+    }
+    toggle() {
+        this.setState({
+            modal: false,
+        });
     }
 
     /*to capture the onchange input values*/
@@ -33,10 +46,11 @@ class GovernmentSignUp extends React.Component {
     }
     /*handle submit form */
     handleLogin() {
-        if (this.state.firstName === undefined || this.state.lastName === undefined || this.state.corpMailAdd === undefined ||
-            this.state.setPassword === undefined || this.state.cnfPassword === undefined || this.state.designation === undefined ||
-            this.state.department === undefined || this.state.empCode === undefined || this.state.Ofcaddress === undefined ||
-            this.state.city === undefined || this.state.gstate === undefined || this.state.pinCode === undefined) {
+        if (this.state.firstName === undefined || this.state.lastName === undefined || this.state.userName === undefined ||
+            this.state.corpMailAdd === undefined || this.state.setPassword === undefined || this.state.cnfPassword === undefined ||
+            this.state.designation === undefined || this.state.department === undefined || this.state.empCode === undefined ||
+            this.state.Ofcaddress === undefined || this.state.city === undefined || this.state.gstate === undefined ||
+            this.state.pinCode === undefined) {
             console.log("in submit", this.state.firstName, this.state.captchaCode);
             this.setState({ SignUpValidation: true });
         }
@@ -45,11 +59,10 @@ class GovernmentSignUp extends React.Component {
         }
         //captcha validation
         if (this.state.inputCaptcha) {
-            this.setState({ CaptchaIsValid: false });
             if (this.state.captchaCode !== this.state.inputCaptcha) {
                 this.setState({ errorCaptcha: 'Please enter valid captcha' });
             } else {
-                this.setState({ CaptchaIsValid: false, errorCaptcha: '' })
+                this.setState({ errorCaptcha: '' })
             }
         }
         else {
@@ -58,12 +71,30 @@ class GovernmentSignUp extends React.Component {
         //password validation
         if (this.state.setPassword && this.state.cnfPassword) {
             if (this.state.setPassword === this.state.cnfPassword) {
-                this.setState({ errorcnfPassword: '' });
+                this.setState({ errorCnfPassword: '' });
 
             }
             else {
-                this.setState({ errorcnfPassword: 'Passwords do not match' });
+                this.setState({ errorCnfPassword: 'Passwords do not match' });
             }
+        }
+        if (this.state.SignUpValidation === false && (this.state.captchaCode === this.state.inputCaptcha) && (this.state.setPassword === this.state.cnfPassword)) {
+            console.log(this.state, "submit sign in");
+
+            var data = {
+                "username": this.state.userName,
+                "First_Name": this.state.firstName,
+                "Last_name": this.state.lastName,
+                "email": this.state.corpMailAdd,
+                "password": this.state.setPassword,
+                "Address": this.state.Ofcaddress,
+                "City": this.state.city,
+                "State": this.state.gstate,
+                "Zip": this.state.pinCode
+            }
+            console.log(data);
+            this.props.dispatch(signupGovernment(data));
+            this.setState({ modal: true });
         }
     }
 
@@ -110,6 +141,18 @@ class GovernmentSignUp extends React.Component {
                     this.setState({ lastName: '', errorLastName: 'Required' });
                 }
                 break;
+            case 'userName': if (value !== undefined && value !== '' && value !== null) {
+                if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
+                    this.setState({ userName: undefined, errorsUserName: 'Please enter valid userName' });
+                }
+                else {
+                    this.setState({ errorsUserName: '' });
+                }
+            }
+            else {
+                this.setState({ userName: '', errorsUserName: 'Required' });
+            }
+                break;
             case 'corpMailAdd':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z0-9._%/+*-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,5}|[a-zA-z]{2,5}\.[a-zA-Z]{2,5})$/)) {
@@ -140,14 +183,14 @@ class GovernmentSignUp extends React.Component {
             case 'cnfPassword':
                 if (value !== undefined && value !== '' && value !== null) {
                     if (!value.match(/^[a-zA-Z0-9.!@#$%&_*\s,^()+=:;'-]+$/)) {
-                        this.setState({ cnfPassword: undefined, errorcnfPassword: 'Confirm Password should be alphanumeric and Special Character' });
+                        this.setState({ cnfPassword: undefined, errorCnfPassword: 'Confirm Password should be alphanumeric and Special Character' });
                     }
                     else {
-                        this.setState({ errorcnfPassword: '' });
+                        this.setState({ errorCnfPassword: '' });
                     }
                 }
                 else {
-                    this.setState({ cnfPassword: '', errorcnfPassword: 'Required' });
+                    this.setState({ cnfPassword: '', errorCnfPassword: 'Required' });
                 }
                 break;
             case 'designation':
@@ -231,7 +274,7 @@ class GovernmentSignUp extends React.Component {
 
             case 'pinCode':
                 if (value !== undefined && value !== '' && value !== null) {
-                    if (!value.match(/^[0-9]{5}(?:-[0-9]{4})?$/)) {
+                    if (!value.match(/^[0-9]{5,6}(?:-[0-9]{4})?$/)) {
                         this.setState({ pinCode: undefined, errorPinCode: 'Please enter valid Pin Code ' });
                     }
                     else {
@@ -248,13 +291,14 @@ class GovernmentSignUp extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className="signUp">
                 <Header />
                 <Grid container className="AppBody" >
                     <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
                         Signup As Government
-                        </Grid>
+                    </Grid>
                 </Grid>
                 <div className="" style={{ paddingTop: '11px', paddingBottom: '1%' }}>
                     <Container maxWidth="md" className="boxStyle" style={{ border: '4px solid #E8E8E8' }}>
@@ -291,6 +335,21 @@ class GovernmentSignUp extends React.Component {
                                     onChange={this.handleChange}
                                 />
                                 <span className="error-msg">{this.state.errorLastName}</span>
+                            </Grid>
+                        </Grid>
+                        <Grid container className="formContainer " justify="center">
+                            <Grid item xs={8}>
+                                <TextField
+                                    id="filled-userName-input"
+                                    label="Enter User Name"
+                                    type="text"
+                                    variant="filled"
+                                    autoComplete="false"
+                                    fullWidth={true}
+                                    name="userName"
+                                    onChange={this.handleChange}
+                                />
+                                <span className="error-msg">{this.state.errorsUserName}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -336,7 +395,7 @@ class GovernmentSignUp extends React.Component {
                                     name="cnfPassword"
                                     onChange={this.handleChange}
                                 />
-                                <span className="error-msg">{this.state.errorcnfPassword}</span>
+                                <span className="error-msg">{this.state.errorCnfPassword}</span>
                             </Grid>
                         </Grid>
                         <Grid container className="formContainer " justify="center">
@@ -474,9 +533,22 @@ class GovernmentSignUp extends React.Component {
                             <Grid item xs={7}>
                                 <Button variant="contained" className="save-btn" size="large" onClick={this.handleLogin} style={{ width: '25%', backgroundColor: '#1E2F50', color: '#FFFFFF' }}>
                                     Signup
-                                    </Button>
+                                </Button>
                             </Grid>
                         </Grid>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                            <ModalBody></ModalBody>
+                            <ModalBody>
+                                <div className="d-flex justify-content-center">
+                                    <p>{this.props.gvtUser}</p>
+                                </div>
+                            </ModalBody>
+                            <div className="d-flex justify-content-center">
+                                <ButtonToolbar className="modal__footer">
+                                    <Button onClick={this.toggle}>OK</Button>
+                                </ButtonToolbar>
+                            </div>
+                        </Modal>
                     </Container>
                 </div>
                 <FooterComponent />
@@ -484,4 +556,10 @@ class GovernmentSignUp extends React.Component {
         )
     }
 }
-export default GovernmentSignUp;
+const mapStateToProps = (state) => {
+
+    return {
+        gvtUser: state.PublicUserReducer.gvtSignUp,
+    }
+}
+export default connect(mapStateToProps)(GovernmentSignUp);

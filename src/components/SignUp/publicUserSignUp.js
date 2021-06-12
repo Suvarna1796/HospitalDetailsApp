@@ -8,8 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
 import FooterComponent from '../footer';
-import {signupPublicUser} from '../../actions/signUp.actions';
+import { signupPublicUser } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
+import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
+import '../../App.css'
 
 class PublicUserSignUp extends React.Component {
     constructor(props) {
@@ -20,12 +22,20 @@ class PublicUserSignUp extends React.Component {
             SignUpValidation: false,
             errorCaptcha: '',
             errorsCnfPassword: '',
-            cnfPassword:''
+            cnfPassword: '',
+            toggle: false,
+            modal: false
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.toggle = this.toggle.bind(this);
+    }
+    toggle() {
+        this.setState({
+            modal: false,
+        });
     }
 
     /*to capture the onchange input values*/
@@ -72,8 +82,8 @@ class PublicUserSignUp extends React.Component {
         }
 
         console.log('this.state.SignUpValidation: ', this.state.SignUpValidation);
-        console.log('this.state.setPassword===this.state.cnfPassword: ', this.state.setPassword === this.state.cnfPassword,this.state.setPassword , this.state.cnfPassword);
-        console.log('this.state.captchaCode===this.state.inputCaptcha: ', this.state.captchaCode === this.state.inputCaptcha,this.state.captchaCode, this.state.inputCaptcha,);
+        console.log('this.state.setPassword===this.state.cnfPassword: ', this.state.setPassword === this.state.cnfPassword, this.state.setPassword, this.state.cnfPassword);
+        console.log('this.state.captchaCode===this.state.inputCaptcha: ', this.state.captchaCode === this.state.inputCaptcha, this.state.captchaCode, this.state.inputCaptcha,);
         if (this.state.SignUpValidation === false && (this.state.captchaCode === this.state.inputCaptcha) && (this.state.setPassword === this.state.cnfPassword)) {
             console.log(this.state, "submit sign in");
 
@@ -91,8 +101,7 @@ class PublicUserSignUp extends React.Component {
             }
             console.log(data);
             this.props.dispatch(signupPublicUser(data));
-        } else {
-            console.log(this.state.SignUpValidation, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+            this.setState({ modal: true });
         }
     }
 
@@ -272,7 +281,7 @@ class PublicUserSignUp extends React.Component {
                 <Grid container className="AppBody" >
                     <Grid item xs={12} style={{ textAlign: 'center', fontSize: '22px' }} fontWeight="fontWeightBold">
                         Signup As Public User
-                        </Grid>
+                    </Grid>
                 </Grid>
                 <div className="" style={{ paddingTop: '11px', paddingBottom: '1%' }}>
                     <Container maxWidth="md" className="boxStyle" style={{ border: '4px solid #E8E8E8' }}>
@@ -477,9 +486,22 @@ class PublicUserSignUp extends React.Component {
                             <Grid item xs={7}>
                                 <Button variant="contained" className="save-btn" size="large" onClick={this.handleLogin} style={{ width: '25%', backgroundColor: '#1E2F50', color: '#FFFFFF' }}>
                                     Signup
-                                    </Button>
+                                </Button>
                             </Grid>
                         </Grid>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                            <ModalBody></ModalBody>
+                            <ModalBody>
+                                <div className="d-flex justify-content-center">
+                                    <p>{this.props.publicUser}</p>
+                                </div>
+                            </ModalBody>
+                            <div className="d-flex justify-content-center">
+                                <ButtonToolbar className="modal__footer">
+                                    <Button onClick={this.toggle}>OK</Button>
+                                </ButtonToolbar>
+                            </div>
+                        </Modal>
                     </Container>
                 </div>
                 <FooterComponent />
@@ -490,7 +512,7 @@ class PublicUserSignUp extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-        publicUser: state,
+        publicUser: state.PublicUserReducer.publicSignUp,
     }
 }
 export default connect(mapStateToProps)(PublicUserSignUp);

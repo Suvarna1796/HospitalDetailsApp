@@ -2,15 +2,15 @@ import axios from 'axios';
 import { BASE_API_URL } from '../configuration';
 
 //public user login
-export default function signupUserLogin(data) {
+export default function loginPublicUser(data) {
     console.log(data);
     return function action(dispatch) {
         const request = axios.post(`${BASE_API_URL}user/login`,
             data
         );
         return request.then(
-            response => dispatch(SuccessPublicLogin(response.data)),
-            err => dispatch(ErrPublicLogin(err.response.data.message))
+            response => dispatch(SuccessPublicLogin(response)),
+            err => dispatch(ErrPublicLogin(err.response))
         );
     }
 }
@@ -33,15 +33,15 @@ const ErrPublicLogin = (data) => {
 
 
 //Government user login
-export function signupGovernmentLogin(data) {
+export function loginGovernmentUser(data) {
     console.log(data);
     return function action(dispatch) {
         const request = axios.post(`https://covid-government-dashboard.herokuapp.com/user/login`,
             data
         );
         return request.then(
-            response => dispatch(SuccessGvtLogin(response.data)),
-            err => dispatch(ErrGvtLogin(err.response.data.message))
+            response => dispatch(SuccessGvtLogin(response)),
+            err => dispatch(ErrGvtLogin(err.response))
         );
     }
 }
@@ -72,7 +72,7 @@ export  function signupPublicUser(data) {
         );
         return request.then(
             response => dispatch(SuccessPublicSignUp(response.data.message)),
-            err => dispatch(ErrPublicSignUp(err.response.data.message))
+            err => dispatch(ErrPublicSignUp(err.response.data.message.msgBody))
         );
     }
 }
@@ -96,28 +96,28 @@ const ErrPublicSignUp = (data) => {
 export function signupGovernment(data) {
     console.log(data);
     return function action(dispatch) {
-        const request = axios.post(`${BASE_API_URL}user/signup`,
+        const request = axios.post(`https://covid-government-dashboard.herokuapp.com/user/signup`,
             data
         );
         return request.then(
-            response => dispatch(SuccesssignupGovernment(response.data.message)),
-            err => dispatch(ErrPublicsignupGovernment(err.response.data.message))
+            response => dispatch(SuccessGovernmentSignUp(response.data.message)),
+            err => dispatch(ErrGovernmentSignUp(err.response.data.message.msgBody))
         );
     }
 }
-const SuccesssignupGovernment = (data) => {
+const SuccessGovernmentSignUp = (data) => {
     console.log(data);
-    const PUBLIC_SIGNUP = 'PUBLIC_SIGNUP';
+    const GOVERNMENT_SIGNUP = 'GOVERNMENT_SIGNUP';
     return {
-        type: PUBLIC_SIGNUP,
+        type: GOVERNMENT_SIGNUP,
         data: data
     }
 }
-const ErrPublicsignupGovernment = (data) => {
+const ErrGovernmentSignUp = (data) => {
     console.log(data);
-    const PUBLIC_SIGNUP = 'PUBLIC_SIGNUP';
+    const GOVERNMENT_SIGNUP = 'GOVERNMENT_SIGNUP';
     return {
-        type: PUBLIC_SIGNUP,
+        type: GOVERNMENT_SIGNUP,
         data: data
     }
 }

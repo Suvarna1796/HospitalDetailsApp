@@ -11,8 +11,9 @@ import Tab from '@material-ui/core/Tab';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
 import { Card } from 'reactstrap';
-import signupUserLogin, { signupGovernmentLogin } from '../../actions/signUp.actions';
+import loginPublicUser, { loginGovernmentUser } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
+import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -27,14 +28,22 @@ class LoginComponent extends React.Component {
             SignUpValidation: false,
             loginUserFlag: false,
             loginSelect: true,
-            loginSelectValue: ''
+            loginSelectValue: '',
+            toggle: false,
+            modal: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleSelection = this.handleSelection.bind(this);
         this.handleLoginSelection = this.handleLoginSelection.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
+    toggle() {
+        this.setState({
+            modal: false,
+        });
+      }
     /*On select of login as user */
     handleLoginSelection(event) {
         if (event.target.value) {
@@ -123,12 +132,12 @@ class LoginComponent extends React.Component {
             }
             if (this.state.loginSelectValue === "governmentUser") {
                 console.log(data, "gvt ");
-                this.props.dispatch(signupGovernmentLogin(data));
+                this.props.dispatch(loginGovernmentUser(data));
 
             }
             else if (this.state.loginSelectValue === "publicUser") {
                 console.log(data, "public user");
-                this.props.dispatch(signupUserLogin(data));
+                this.props.dispatch(loginPublicUser(data));
                 console.log(this.props)
             }
             else if (this.state.loginSelectValue === "hospitalUser") {
@@ -147,17 +156,27 @@ class LoginComponent extends React.Component {
             value: tabvalue,
         });
     }
-    render() {
-        const { value } = this.state;
-        // console.log(this.props, "in render")
-        if (this.props.userLogin) {
-            if (this.props.userLogin.publicUserLogin) {
-               return  <Redirect to='/publicDashboard1' />
+    componentWillReceiveProps(newProps) {
+        if (newProps.userLogin.publicUserLogin) {
+            if (newProps.userLogin.publicUserLogin.status === 200) {
+                this.props.history.push('/publicDashboard1')
             }
-         if(this.props.userLogin.gvtUserLogin){
-               return <Redirect to='/governmentDashboard' />
+            if (newProps.userLogin.publicUserLogin.status === 401) {
+                this.setState({ modal: true })
             }
         }
+        if (newProps.userLogin.gvtUserLogin) {
+            if (newProps.userLogin.gvtUserLogin.status === 200) {
+                this.props.history.push('/governmentDashboard')
+            }
+            if (newProps.userLogin.gvtUserLogin.status === 401) {
+                this.setState({ modal: true })
+            }
+        }
+    }
+    render() {
+        const { value } = this.state;
+       
         return (
             <div >
                 <HeaderComponent />
@@ -290,6 +309,20 @@ class LoginComponent extends React.Component {
                         </Grid>
                     </div> : ''}</div>
                 }
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle} >
+                    <ModalBody></ModalBody>
+                    <ModalBody>
+                        <div className="d-flex justify-content-center">
+                            <p>Please enter valid credentials</p>
+                        </div>
+                    </ModalBody>
+                    <div className="d-flex justify-content-center">
+                        <ButtonToolbar className="modal__footer">
+                            <Button onClick={this.toggle}>OK</Button>
+                        </ButtonToolbar>
+                    </div>
+                </Modal>
                 <FooterComponent name="login" />
             </div>
         );
@@ -299,7 +332,7 @@ class LoginComponent extends React.Component {
 
 
 const mapStateToProps = (state) => {
-        return {
+    return {
         userLogin: state.PublicUserReducer,
     }
 }
