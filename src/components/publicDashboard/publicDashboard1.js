@@ -7,6 +7,8 @@ import '../../App.css';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
+import { publicUsergetList } from '../../actions/signUp.actions';
+import { connect } from 'react-redux';
 
 var locationPosition;
 
@@ -25,12 +27,14 @@ class PublicDashboard1 extends React.Component {
     detectLocation() {
         if (this.state.checkboxValue === true) {
             this.setState({ locationFlag: false });
-            
+
         } else {
             this.setState({ locationFlag: true })
         }
     }
-
+    componentDidMount() {
+        this.props.dispatch(publicUsergetList);
+    }
     render() {
         return (
             <div>
@@ -113,7 +117,7 @@ class PublicDashboard1 extends React.Component {
                                 <Grid item xs={9}>
                                     <Button className="tableBtn" onClick={this.detectLocation} >
                                         <MyLocationIcon /> &nbsp;Detect Location
-                                         </Button>
+                                    </Button>
                                 </Grid>
                             </Grid>
                             {this.state.locationFlag === true ?
@@ -167,4 +171,11 @@ class DetectLocationComponent extends React.Component {
         )
     }
 }
-export default PublicDashboard1;
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        publicUser: state.PublicUserReducer.publicUserdata,
+    }
+}
+export default connect(mapStateToProps)(PublicDashboard1);

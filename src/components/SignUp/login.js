@@ -4,7 +4,7 @@ import "react-client-captcha/dist/index.css"
 import '../../App.css';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -156,7 +156,7 @@ class LoginComponent extends React.Component {
             value: tabvalue,
         });
     }
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps (newProps) {
         if (newProps.userLogin.publicUserLogin) {
             if (newProps.userLogin.publicUserLogin.status === 200) {
                 this.props.history.push('/publicDashboard1')
@@ -212,7 +212,7 @@ class LoginComponent extends React.Component {
                             <Grid item xs={8} className="LoginTabs ">
                                 <Card>
                                     <br />
-                                    <Tabs className="TabIndicator" TabIndicatorProps={{ style: { backgroundColor: "#1E2F50" } }} value={value} onChange={this.handleTabChange} style={{ paddingLeft: '30%' }}>
+                                    <Tabs className="TabIndicator" TabIndicatorProps={{ style: { backgroundColor: "#1E2F50" } }} value={value} onChange={this.handleTabChange} centered>
                                         <Tab label="Login" className="tab1" />
                                         <Tab label="SignUp" className="tab2" >
                                         </Tab>

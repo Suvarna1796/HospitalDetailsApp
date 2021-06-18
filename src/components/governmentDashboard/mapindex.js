@@ -5,7 +5,7 @@ import Active from './activeChart';
 import Confirmed from './confirmedChart';
 import Deceased from './deceasedChart';
 import Recovered from './recoveredChart';
-import Map from './mapChart';
+import Map from './map/App';
 import ActiveChart from './activeLineChart';
 import RecoveredChart from './recoverdLineChart';
 import ConfirmedChart from './confirmedLineChart';
@@ -25,8 +25,10 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import TimerIcon from '@material-ui/icons/Timer';
 import TextField from '@material-ui/core/TextField';
+import { gvtUsergetList } from '../../actions/signUp.actions';
+import { connect } from 'react-redux';
 // import { BsArrow90DegLeft } from "react-icons/bs";
-class CryptoDashboard extends PureComponent {
+class MapIndexComponent extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,6 +84,9 @@ class CryptoDashboard extends PureComponent {
             //   events: logs.slice()
         });
     };
+    componentDidMount() {
+        // this.props.dispatch(gvtUsergetList);
+    }
     render() {
         return (
             <div className="mapClass">
@@ -234,7 +239,7 @@ class CryptoDashboard extends PureComponent {
 
                         </Row>
 
-                        <Col md={6} className='mt-3'>
+                        <Col md={5} className='mt-3'>
                             <Container>
                                 <Confirmed />
                                 <Active />
@@ -243,7 +248,8 @@ class CryptoDashboard extends PureComponent {
                             </Container>
                         </Col>
                         <Col md={6}>
-                            <Map />
+                           
+                         <Map />
                         </Col>
                     </Row>
                     <br />
@@ -292,4 +298,11 @@ class CryptoDashboard extends PureComponent {
     }
 }
 
-export default CryptoDashboard;
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        publicUser: state.PublicUserReducer.gvtUserdata,
+    }
+}
+export default connect(mapStateToProps)(MapIndexComponent);
