@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import ClientCaptcha from "react-client-captcha"
 import Button from '@material-ui/core/Button';
 import FooterComponent from '../footer';
-import { signupPublicUser } from '../../actions/signUp.actions';
+import { signupPublic } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
 import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
 import '../../App.css'
@@ -100,7 +100,7 @@ class PublicUserSignUp extends React.Component {
                 "Zip": this.state.pinCode
             }
             console.log(data);
-            this.props.dispatch(signupPublicUser(data));
+            this.props.dispatch(signupPublic(data));
             this.setState({ modal: true });
         }
     }
@@ -323,21 +323,6 @@ class PublicUserSignUp extends React.Component {
                         <Grid container className="formContainer " justify="center">
                             <Grid item xs={8}>
                                 <TextField
-                                    id="filled-mobileNumber-input"
-                                    label="Enter Mobile Number"
-                                    type="text"
-                                    variant="filled"
-                                    autoComplete="false"
-                                    fullWidth={true}
-                                    name="mobileNumber"
-                                    onChange={this.handleChange}
-                                />
-                                <span className="error-msg">{this.state.errorMobileNumber}</span>
-                            </Grid>
-                        </Grid>
-                        <Grid container className="formContainer " justify="center">
-                            <Grid item xs={8}>
-                                <TextField
                                     id="filled-userName-input"
                                     label="Enter User Name"
                                     type="text"
@@ -350,6 +335,22 @@ class PublicUserSignUp extends React.Component {
                                 <span className="error-msg">{this.state.errorsUserName}</span>
                             </Grid>
                         </Grid>
+                        <Grid container className="formContainer " justify="center">
+                            <Grid item xs={8}>
+                                <TextField
+                                    id="filled-mobileNumber-input"
+                                    label="Enter Mobile Number"
+                                    type="text"
+                                    variant="filled"
+                                    autoComplete="false"
+                                    fullWidth={true}
+                                    name="mobileNumber"
+                                    onChange={this.handleChange}
+                                />
+                                <span className="error-msg">{this.state.errorMobileNumber}</span>
+                            </Grid>
+                        </Grid>
+                      
                         <Grid container className="formContainer " justify="center">
                             <Grid item xs={8}>
                                 <TextField

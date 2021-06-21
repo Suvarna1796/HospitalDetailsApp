@@ -85,7 +85,7 @@ class MapIndexComponent extends PureComponent {
         });
     };
     componentDidMount() {
-        // this.props.dispatch(gvtUsergetList);
+        this.props.dispatch(gvtUsergetList);
     }
     render() {
         return (
@@ -95,62 +95,71 @@ class MapIndexComponent extends PureComponent {
                 <Container >
                     <Row>
                         <Col md={12}>
+                            {this.state.timeDisplay === true ?
+                                <div>
+                                    <Grid container spacing={1} style={{ paddingTop: '0' }}>
+                                        <Grid container item xs={12} spacing={3} direction="row">
+                                            <Grid item xs={6} sm={1}>
+                                            </Grid>
+                                            <Grid item xs={6} sm={3}>
+                                                <p >Date</p>
+                                                <DatePicker
+                                                    onChange={this.admissionDate}
+                                                    clearIcon={null}
+                                                    value={this.state.admissionDatevalue}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6} sm={3} align="right">
+                                                <p align="center" style={{ marginLeft: "15%" }}>Time</p>
+                                                <TimePicker
+                                                    onChange={this.handleTime}
+                                                    value={this.state.timeStartvalue}
+                                                    clearIcon={null}
+                                                    format="h:mm:ss a"
+                                                    amPmAriaLabel={'Select AM/PM'}
+                                                    clockIcon={<TimerIcon />}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6} sm={1} className="mt-4" align="center">
+                                                <p style={{ paddingTop: '13%' }}>to</p>
+                                            </Grid>
+                                            <Grid item xs={6} sm={3} className="pt-5">
+                                                <TimePicker
+                                                    onChange={this.handleTime}
+                                                    value={this.state.timeStartvalue}
+                                                    clearIcon={null}
+                                                    format="h:mm:ss a"
+                                                    amPmAriaLabel={'AM/PM'}
+                                                    clockIcon={<TimerIcon />}
+                                                />
+                                            </Grid>
 
-                            {this.state.timeDisplay === true ? <Container className='mt-3'>
-                                <Grid container >
-                                    <Grid item xs={1}></Grid>
-                                    <Grid item xs={3}>
-                                        <div>
-                                            <label >Date</label>
-                                        </div>
-                                        <DatePicker
-                                            onChange={this.admissionDate}
-                                            clearIcon={null}
-                                            value={this.state.admissionDatevalue}
-                                        />
+                                        </Grid>
+
                                     </Grid>
-                                    <Grid item xs={3} align="right">
-                                        <div>
-                                            <label  >Time</label>
-                                        </div>
-                                        <TimePicker
-                                            onChange={this.handleTime}
-                                            value={this.state.timeStartvalue}
-                                            clearIcon={null}
-                                            format="h:mm:ss a"
-                                            amPmAriaLabel={'Select AM/PM'}
-                                            clockIcon={<TimerIcon />}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={1} align="center" className="mt-4"><div>to</div></Grid>
-                                    <Grid item xs={3} className="pt-4">
-                                        <TimePicker
-                                            onChange={this.handleTime}
-                                            value={this.state.timeStartvalue}
-                                            clearIcon={null}
-                                            format="h:mm:ss a"
-                                            amPmAriaLabel={'AM/PM'}
-                                            clockIcon={<TimerIcon />}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Container> : ''}
+
+                                </div>
+                                : ''}
                             {this.state.pinCodeDisplay === true ? <Container className='mt-3'>
-                                <Grid container >
-                                    <Grid item xs={1}></Grid>
-                                    <Grid item xs={3}>
-                                        <div>
-                                            <label >Pincode</label>
-                                        </div>
-                                        <TextField
-                                            id="filled-pinCode-input"
-                                            placeholder="Pincode"
-                                            type="text"
-                                            variant="filled"
-                                            autoComplete="false"
-                                            fullWidth={true}
-                                            name="pinCode"
-                                        />
+                                <Grid container spacing={1} style={{ paddingTop: '0' }}>
+                                    <Grid container item xs={12} spacing={3} direction="row">
+                                        {/* <Grid item xs={2}> */}
+                                        {/* <Grid container > */}
+                                        <Grid item xs={1}></Grid>
+                                        <Grid item xs={3}>
+                                            <div>
+                                                <label >Pincode</label>
+                                            </div>
+                                            <TextField
+                                                id="filled-pinCode-input"
+                                                placeholder="Pincode"
+                                                type="text"
+                                                variant="filled"
+                                                autoComplete="false"
+                                                fullWidth={true}
+                                                name="pinCode"
+                                            />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Container> : ''}
@@ -206,33 +215,34 @@ class MapIndexComponent extends PureComponent {
                         </Col>
                     </Row>
                     <Row className="dashboard">
-                        <Row >
+                        <Row style={{ paddingTop: '1%' }}>
 
-                            <Accordion onChange={this.handleChange('panel1')} className="mapAccordian" style={(this.state.timeDisplay === true || this.state.pinCodeDisplay === true || this.state.densityDisplay === true || this.state.areaDisplay === true || this.state.deathRateDisplay === true) ? { top: '-7%' } : {}}>
+                            <Accordion onChange={this.handleChange('panel1')} className="mapAccordian" style={(this.state.timeDisplay === true || this.state.pinCodeDisplay === true || this.state.densityDisplay === true || this.state.areaDisplay === true || this.state.deathRateDisplay === true) ? { top: '-9%' } : {}}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header"
                                 >
+                                    <div></div>
                                     <Typography >Sort By</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails id="example">
                                     <ul >
                                         <li onClick={this.handleList} data-user="time">
                                             Time
-                                            </li>
+                                        </li>
                                         <li onClick={this.handleList} data-user="pinCode" >
                                             Pincode
-                                            </li>
+                                        </li>
                                         <li onClick={this.handleList} data-user="density" >
                                             Density
-                                            </li>
+                                        </li>
                                         <li onClick={this.handleList} data-user="area" >
                                             Area
-                                            </li>
+                                        </li>
                                         <li onClick={this.handleList} data-user="deathRate">
                                             Death Rate
-                                            </li>
+                                        </li>
                                     </ul>
                                 </AccordionDetails>
                             </Accordion>
@@ -248,8 +258,7 @@ class MapIndexComponent extends PureComponent {
                             </Container>
                         </Col>
                         <Col md={6}>
-                           
-                         <Map />
+                            <Map />
                         </Col>
                     </Row>
                     <br />
@@ -258,13 +267,13 @@ class MapIndexComponent extends PureComponent {
                         <Row className={"pl-0 pl-sm-0 pl-md-3 pl-lg-4 pl-xl-5"}>
                             <Col>
                                 {/* <div style={{ display: 'flex' }}> */}
-                                    <select style={{ width: '200% ', height: '42px', border: '1px solid #DFDFDF' }} >
-                                        <option>Karnataka</option>
-                                        <option>Delhi</option>
-                                        <option>Maharastra</option>
-                                        <option>Andhra pradesh</option>
-                                    </select>
-                                    {/* <div style={{ flexGrow: " 1",paddingBottom:'0px',justiftyContent:"center", alignItems:"center" }}><BsArrow90DegLeft style={{verticalAlign: 'middle'}} /></div> */}
+                                <select style={{ width: '200% ', height: '42px', border: '1px solid #DFDFDF' }} >
+                                    <option>Karnataka</option>
+                                    <option>Delhi</option>
+                                    <option>Maharastra</option>
+                                    <option>Andhra pradesh</option>
+                                </select>
+                                {/* <div style={{ flexGrow: " 1",paddingBottom:'0px',justiftyContent:"center", alignItems:"center" }}><BsArrow90DegLeft style={{verticalAlign: 'middle'}} /></div> */}
                                 {/* </div> */}
                             </Col>
                         </Row>

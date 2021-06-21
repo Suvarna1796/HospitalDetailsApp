@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import '../../App.css';
 import DatePicker from 'react-date-picker';
 import FooterComponent from '../footer';
+import hspUsergetList,{hspUserBasicdetails} from '../../actions/hospital.actions';
+import { connect } from 'react-redux';
 // import "react-datepicker/dist/react-datepicker.css";
 
 class hopitalDefaultComponent extends React.Component {
@@ -26,7 +28,18 @@ class hopitalDefaultComponent extends React.Component {
         this.hospitalDetailSubmit = this.hospitalDetailSubmit.bind(this);
     }
     hospitalDetailSubmit() {
-
+        console.log(this.state)
+        var data = {
+            "username": this.state.username,
+            "Total_Patients": this.state.hsptotalPatients,
+            "Total_Beds": this.state.hspBedsSelection,
+            "Occupied_Beds": this.state.hspOccupiedBeds,
+            "Empty_Beds": this.state.hspEmptyBeds,
+            "Oxygen_Availability ": this.state.hspOxygenAvail,
+            "Medicine_Status": this.state.hspMedicalStatus
+        }
+        console.log(data);
+        this.props.dispatch(hspUserBasicdetails(data))
     }
     patientDetailSubmit() {
 
@@ -36,7 +49,10 @@ class hopitalDefaultComponent extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-        this.validateAllFileds(event.target.name, event.target.value);
+        // this.validateAllFileds(event.target.name, event.target.value);
+    }
+    componentDidMount() {
+        this.props.dispatch(hspUsergetList);
     }
     /* Validating the form fields */
     validateAllFileds(fieldName, value) {
@@ -162,13 +178,14 @@ class hopitalDefaultComponent extends React.Component {
 
     render() {
         const { value } = this.state;
+        console.log(this.props)
 
         return (
             <div>
-                <Header  search={value === 0 ? "pateintName" : value === 1 ? "pateintId" : ''} />
+                <Header search={value === 0 ? "pateintName" : value === 1 ? "pateintId" : ''} />
                 <div><br /></div>
                 <div className="publicTabs ">
-                    <Tabs className="TabIndicator" TabIndicatorProps={{style: {backgroundColor: "#1E2F50"}}} centered value={value} onChange={this.handleTabChange} >
+                    <Tabs className="TabIndicator" TabIndicatorProps={{ style: { backgroundColor: "#1E2F50" } }} centered value={value} onChange={this.handleTabChange} >
                         <Tab label="Basic Details" className="tab1" />
                         <Tab label="Patient Details" className="tab2" />
                     </Tabs>
@@ -191,11 +208,12 @@ class hopitalDefaultComponent extends React.Component {
                             </Grid>
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
-                                <select className="form-control" id="hspBedsSelection" name="hspBedsSelection" >
+                                <input type="text" name="hspBedsSelection" id="hspBedsSelection" defaultValue="20" className="form-control" onChange={this.handleChange} />
+                                {/* <select className="form-control" id="hspBedsSelection" name="hspBedsSelection" >
                                     <option value="1">General Beds - 20</option>
                                     <option value="2">Ventilator Beds</option>
                                     <option value="3">ICU Beds</option>
-                                </select>
+                                </select> */}
                                 <span className="error-msg">{this.state.errors.hspBedsSelection}</span>
 
                             </Grid>
@@ -206,11 +224,12 @@ class hopitalDefaultComponent extends React.Component {
                             </Grid>
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
-                                <select className="form-control" id="hspOccupiedBeds" name="hspOccupiedBeds" >
+                            <input type="text" name="hspOccupiedBeds" id="hspOccupiedBeds" defaultValue="10" className="form-control" onChange={this.handleChange} />
+                                {/* <select className="form-control" id="hspOccupiedBeds" name="hspOccupiedBeds" >
                                     <option value="1">General Beds - 08</option>
                                     <option value="2">Ventilator Beds</option>
                                     <option value="3">ICU Beds</option>
-                                </select>
+                                </select> */}
                                 <span className="error-msg">{this.state.errors.hspOccupiedBeds}</span>
 
                             </Grid>
@@ -221,11 +240,12 @@ class hopitalDefaultComponent extends React.Component {
                             </Grid>
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
-                                <select className="form-control" id="hspEmptyBeds" name="hspEmptyBeds" >
+                            <input type="text" name="hspEmptyBeds" id="hspEmptyBeds" defaultValue="1" className="form-control" onChange={this.handleChange} />
+                                {/* <select className="form-control" id="hspEmptyBeds" name="hspEmptyBeds" >
                                     <option value="1">General Beds - 11</option>
                                     <option value="2">Ventilator Beds</option>
                                     <option value="3">ICU Beds</option>
-                                </select>
+                                </select> */}
                                 <span className="error-msg">{this.state.errors.hspEmptyBeds}</span>
 
                             </Grid>
@@ -265,6 +285,7 @@ class hopitalDefaultComponent extends React.Component {
 
                             </Grid>
                         </Grid>
+                        <br />
                         <Grid container className="GridSpacing" >
                             <Grid item xs={12} style={{ textAlign: 'center', justify: 'center' }}>
                                 <Button variant="contained" className="save-btn" size="large" style={{ backgroundColor: '#BCA231', color: '#FFFFFF' }} onClick={this.hospitalDetailSubmit}>Submit details</Button>
@@ -373,9 +394,17 @@ class hopitalDefaultComponent extends React.Component {
                         </Grid>
                     </div>}
                 </div>
-                <FooterComponent name="login"/>
+                <FooterComponent name="login" />
             </div>
         )
     }
 }
-export default hopitalDefaultComponent;
+
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        hspUser: state.HospitalUserReducer,
+    }
+}
+export default connect(mapStateToProps)(hopitalDefaultComponent);

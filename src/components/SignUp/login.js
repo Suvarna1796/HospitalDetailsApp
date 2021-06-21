@@ -11,7 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
 import { Card } from 'reactstrap';
-import loginPublicUser, { loginGovernmentUser } from '../../actions/signUp.actions';
+import loginPublicUser, { loginGovernmentUser,loginHospitalUser } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
 import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
 
@@ -142,6 +142,7 @@ class LoginComponent extends React.Component {
             }
             else if (this.state.loginSelectValue === "hospitalUser") {
                 console.log(data, "hospitalUser user");
+                this.props.dispatch(loginHospitalUser(data));
             }
         }
     }
@@ -170,6 +171,14 @@ class LoginComponent extends React.Component {
                 this.props.history.push('/governmentDashboard')
             }
             if (newProps.userLogin.gvtUserLogin.status === 401) {
+                this.setState({ modal: true })
+            }
+        }
+        if (newProps.userLogin.hspUserLogin) {
+            if (newProps.userLogin.hspUserLogin.status === 200) {
+                this.props.history.push('/hospitalDashboard')
+            }
+            if (newProps.userLogin.hspUserLogin.status === 401) {
                 this.setState({ modal: true })
             }
         }

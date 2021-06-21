@@ -18,8 +18,9 @@ import PublicUserSignUp from './components/SignUp/publicUserSignUp';
 import hospitalDashboard from './components/hospitalDashboard/hospitalDashboard';
 import chart from './components/governmentDashboard/mapindex';
 import PublicUserReducer from './reducers/signUp.reducer';
+import HospitalUserReducer from './reducers/hospital.reducer';
 const reducer = combineReducers({
-  PublicUserReducer
+  PublicUserReducer,HospitalUserReducer
 });
 const store = createStore(
   reducer,

@@ -17,7 +17,7 @@ export default function loginPublicUser(data) {
 }
 const SuccessPublicLogin = (data) => {
     console.log(data, "public alogin api response");
-    token=data.data.token
+    token=data.data.token;
     // token=data;
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
     return {
@@ -68,10 +68,41 @@ const ErrGvtLogin = (data) => {
         data: data
     }
 }
-
+//Hospital user login
+export function loginHospitalUser(data) {
+    console.log(data);
+    return function action(dispatch) {
+        const request = axios.post(`https://covid-dash-combined.herokuapp.com/hospital/user/login`,
+            data
+        );
+        return request.then(
+            response => dispatch(
+                SuccessHspLogin(response)),
+            err => dispatch(ErrHspLogin(err.response))
+        );
+    }
+}
+const SuccessHspLogin = (data) => {
+    console.log(data, "login response sucess");
+    token = data;
+    const HOSPITAL_LOGIN = 'HOSPITAL_LOGIN';
+    return {
+        type: HOSPITAL_LOGIN,
+        data: data
+    }
+}
+const ErrHspLogin = (data) => {
+    console.log(data);
+    token = ''
+    const HOSPITAL_LOGIN = 'HOSPITAL_LOGIN';
+    return {
+        type: HOSPITAL_LOGIN,
+        data: data
+    }
+}
 
 //Public User Signup
-export function signupPublicUser(data) {
+export function signupPublic(data) {
     console.log(data);
     return function action(dispatch) {
         const request = axios.post(`${BASE_API_URL}user/signup`,
@@ -128,8 +159,37 @@ const ErrGovernmentSignUp = (data) => {
         data: data
     }
 }
+//hospital user signup
+export function signupHospital(data) {
+    console.log(data);
+    return function action(dispatch) {
+        const request = axios.post(`https://covid-dash-combined.herokuapp.com/hospital/user/signup`,
+            data
+        );
+        return request.then(
+            response => dispatch(SuccessHospitalSignUp(response.data.message)),
+            err => dispatch(ErrHospitalSignUp(err.response.data.message.msgBody))
+        );
+    }
+}
+const SuccessHospitalSignUp = (data) => {
+    console.log(data);
+    const HOSPITAL_SIGNUP = 'HOSPITAL_SIGNUP';
+    return {
+        type: HOSPITAL_SIGNUP,
+        data: data
+    }
+}
+const ErrHospitalSignUp = (data) => {
+    console.log(data);
+    const HOSPITAL_SIGNUP = 'HOSPITAL_SIGNUP';
+    return {
+        type: HOSPITAL_SIGNUP,
+        data: data
+    }
+}
 
-
+//public user details
 export function publicUsergetList() {
     console.log(token,"token")
     var promise = new Promise((dispatch) => {
@@ -137,8 +197,9 @@ export function publicUsergetList() {
             .get(`https://public12.herokuapp.com/stats`,
             { headers:  {
                 'Content-Type':'application/json',
-                    'Authorization': token
-                }}
+                'Accept' : 'application/json',
+                'Authorization': token,
+             }}
             )
             .then(function (result) {
                 console.log(result);

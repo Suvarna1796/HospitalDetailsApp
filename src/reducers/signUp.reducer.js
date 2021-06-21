@@ -11,6 +11,10 @@ const PublicUserReducer = (state = [], action) => {
             return Object.assign({}, state, {
                 gvtSignUp: action.data
             })
+        case 'HOSPITAL_SIGNUP':
+            return Object.assign({}, state, {
+                hspSignUp: action.data
+            })
         case 'PUBLIC_LOGIN':
             return Object.assign({}, state, {
                 publicUserLogin: action.data
@@ -18,6 +22,10 @@ const PublicUserReducer = (state = [], action) => {
         case 'GOVERNMENT_LOGIN':
             return Object.assign({}, state, {
                 gvtUserLogin: action.data
+            })
+        case 'HOSPITAL_LOGIN':
+            return Object.assign({}, state, {
+               hspUserLogin: action.data
             })
         case 'PUBLIC_USER_DATA':
             return Object.assign({}, state, {
