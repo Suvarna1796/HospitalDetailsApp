@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_API_URL } from '../configuration';
 var token;
-
+var userID;
 //public user login
 export default function loginPublicUser(data) {
     console.log(data);
@@ -17,7 +17,10 @@ export default function loginPublicUser(data) {
 }
 const SuccessPublicLogin = (data) => {
     console.log(data, "public alogin api response");
-    token=data.data.token;
+    token = data.data.token;
+    userID = data.data.objectid;
+    localStorage.setItem('token',token)
+    localStorage.setItem('userID', userID)
     // token=data;
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
     return {
@@ -27,7 +30,7 @@ const SuccessPublicLogin = (data) => {
 }
 const ErrPublicLogin = (data) => {
     console.log(data);
-    token=''
+    token = ''
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
     return {
         type: PUBLIC_LOGIN,
@@ -191,15 +194,18 @@ const ErrHospitalSignUp = (data) => {
 
 //public user details
 export function publicUsergetList() {
-    console.log(token,"token")
+    var publicUserid = localStorage.getItem('userID');
+    var publicToken = localStorage.getItem('token');
     var promise = new Promise((dispatch) => {
         axios
-            .get(`https://public12.herokuapp.com/stats`,
-            { headers:  {
-                'Content-Type':'application/json',
-                'Accept' : 'application/json',
-                'Authorization': token,
-             }}
+            .get(`https://public12.herokuapp.com/stats/` + publicUserid,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'Accept': 'application/json',
+                        'Authorization': publicToken,
+                    }
+                }
             )
             .then(function (result) {
                 console.log(result);
@@ -231,14 +237,14 @@ const ErrPublicUser = (data) => {
 }
 
 export function gvtUsergetList() {
-    console.log(token,"token")
+    console.log(token, "token")
     var promise = new Promise((dispatch) => {
         axios
             .get(`https://covid-government-dashboard.herokuapp.com/stats`
-            // { headers:  {
-            //     'Content-Type':'application/json',
-            //         'Authorization': token
-            //     }}
+                // { headers:  {
+                //     'Content-Type':'application/json',
+                //         'Authorization': token
+                //     }}
             )
             .then(function (result) {
                 console.log(result);
