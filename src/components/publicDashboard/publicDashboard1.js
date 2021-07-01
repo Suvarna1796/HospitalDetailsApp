@@ -9,6 +9,7 @@ import FooterComponent from '../footer';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import { publicUsergetList } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
+import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
 
 var locationPosition;
 
@@ -16,7 +17,7 @@ class PublicDashboard1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationFlag: false, checkboxValue: false
+            locationFlag: false, checkboxValue: false, modalFlag: false
         }
         this.detectLocation = this.detectLocation.bind(this);
         this.setCheckboxValue = this.setCheckboxValue.bind(this);
@@ -34,7 +35,9 @@ class PublicDashboard1 extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(publicUsergetList);
+        localStorage.setItem('user', 'public')
     }
+
     render() {
         return (
             <div>
@@ -147,7 +150,21 @@ class PublicDashboard1 extends React.Component {
                     </Grid>
 
                 </Grid >
-                <FooterComponent />
+                <FooterComponent history={this.props.history} />
+                <Modal isOpen={this.state.modalFlag} >
+                    <ModalBody></ModalBody>
+                    <ModalBody>
+                        <div className="d-flex justify-content-center">
+                            <p>Please Login to continue</p>
+                        </div>
+                    </ModalBody>
+                    <div className="d-flex justify-content-center" style={{ paddingBottom: '3%' }}>
+                        <ButtonToolbar className="modal__footer">
+                            <Link to='/'><Button onClick={this.toggle}>Yes</Button></Link>
+                            <Link to='/'><Button onClick={this.toggle}>No</Button></Link>
+                        </ButtonToolbar>
+                    </div>
+                </Modal>
             </div>
 
         )
@@ -173,7 +190,7 @@ class DetectLocationComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         publicUser: state.PublicUserReducer.publicUserdata,
     }

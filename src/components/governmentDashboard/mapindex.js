@@ -27,7 +27,9 @@ import TimerIcon from '@material-ui/icons/Timer';
 import TextField from '@material-ui/core/TextField';
 import { gvtUsergetList } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
+import NativeSelect from '@material-ui/core/NativeSelect';
 // import { BsArrow90DegLeft } from "react-icons/bs";
+var data2 = []
 class MapIndexComponent extends PureComponent {
     constructor(props) {
         super(props);
@@ -86,8 +88,20 @@ class MapIndexComponent extends PureComponent {
     };
     componentDidMount() {
         this.props.dispatch(gvtUsergetList);
+        localStorage.setItem('user', 'gvt')
     }
+
     render() {
+        if (this.props.publicUser) {
+            data2 = []
+            this.props.publicUser.map((item, index) => {
+                var Obj = {
+                    'id': index + 1,
+                    'state': item.State
+                };
+                return data2.push(Obj);
+            })
+        }
         return (
             <div className="mapClass">
                 <HeaderComponent />
@@ -251,14 +265,14 @@ class MapIndexComponent extends PureComponent {
 
                         <Col md={5} className='mt-3'>
                             <Container>
-                                <Confirmed />
-                                <Active />
-                                <Recovered />
-                                <Deceased />
+                                <Confirmed data={this.props.publicUser} />
+                                <Active data={this.props.publicUser} />
+                                <Recovered data={this.props.publicUser} />
+                                <Deceased data={this.props.publicUser} />
                             </Container>
                         </Col>
                         <Col md={6}>
-                            <Map />
+                            <Map data={this.props.publicUser} />
                         </Col>
                     </Row>
                     <br />
@@ -267,12 +281,19 @@ class MapIndexComponent extends PureComponent {
                         <Row className={"pl-0 pl-sm-0 pl-md-3 pl-lg-4 pl-xl-5"}>
                             <Col>
                                 {/* <div style={{ display: 'flex' }}> */}
-                                <select style={{ width: '200% ', height: '42px', border: '1px solid #DFDFDF' }} >
-                                    <option>Karnataka</option>
-                                    <option>Delhi</option>
-                                    <option>Maharastra</option>
-                                    <option>Andhra pradesh</option>
-                                </select>
+
+                                <NativeSelect
+                                    style={{ paddingBottom: '0px' }}
+                                    fullWidth={true}
+                                    disableUnderline={true}
+                                    onChange={this.handleChange}
+                                    name='EventType'
+                                >
+                                    <option value=""> --Select--</option>
+                                    {data2.map(name => (
+                                        <option key={name.id} value={name.id}>{name.state}</option>
+                                    ))}
+                                </NativeSelect>
                                 {/* <div style={{ flexGrow: " 1",paddingBottom:'0px',justiftyContent:"center", alignItems:"center" }}><BsArrow90DegLeft style={{verticalAlign: 'middle'}} /></div> */}
                                 {/* </div> */}
                             </Col>
@@ -295,13 +316,15 @@ class MapIndexComponent extends PureComponent {
                     <hr />
                     <Row >
                         <Col  >
-                            <TableMap />
+                            <TableMap data={this.props.publicUser} />
                         </Col>
 
                     </Row>
                 </Container>
-                <Container></Container>
+                {/* <Container style={{position:'relative'}}>
                 <FooterComponent />
+                </Container> */}
+
             </div>
         );
     }
@@ -311,7 +334,7 @@ class MapIndexComponent extends PureComponent {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        publicUser: state.PublicUserReducer.gvtUserdata,
+        publicUser: state.PublicUserReducer.gvtUserdata ? state.PublicUserReducer.gvtUserdata.stats : state.PublicUserReducer.gvtUserdata,
     }
 }
 export default connect(mapStateToProps)(MapIndexComponent);

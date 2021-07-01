@@ -44,21 +44,21 @@ class PublicDashboard2 extends React.Component {
         this.setState({ viewDetailsFlag: false })
     }
     handleOpenEditRow(i) {
-        console.log(i, "111111111111111  view details")
+        // console.log(i, "111111111111111  view details")
         // this.state.viewdetails = i;
         this.setState({ viewDetailsFlag: true, viewdetails: i });
         <Link to='/'></Link>
     }
     shareDetailsRow(details) {
         this.setState({ viewDetailsFlag: {} });
-        console.log(details, "2222222222222222222   share details");
+        // console.log(details, "2222222222222222222   share details");
         copy(details.name);
         this.setState({ viewDetailsFlag: false })
         // var tooltip = document.querySelectorAll(details.name);
         // tooltip.style.visibility = 'visible';
     }
     render() {
-        console.log(rows, "rows in 2 render", this.state.viewDetailsFlag)
+        // console.log(rows, "rows in 2 render", this.state.viewDetailsFlag)
         return (
             <div >
                 <HeaderComponent />
@@ -87,7 +87,7 @@ class PublicDashboard2 extends React.Component {
                     </div>}
                 {/* {this.props.showEditPlan || this.props.showViewPlan ? 
                     <EditRiskImpact dataObj={this.props.dataObj} view={this.props.view} oncancel={this.handleClose} /> : ''} */}
-                <FooterComponent name="login"/>
+                <FooterComponent history={this.props.history}/>
             </div>
         )
     }

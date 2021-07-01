@@ -23,7 +23,6 @@ class TableComponent extends React.Component {
     }
 
     handleChangePage = (event, page) => {
-        console.log(event, page, "pppppppppppppp")
         this.setState({ page });
     };
     handleChangeRowsPerPage = (event) => {
@@ -41,7 +40,7 @@ class TableComponent extends React.Component {
     }
 
     displayRows() {
-        console.log(this.state);
+       // console.log(this.state);
         var cols = this.props.rows,
             rows = this.props.cols;
         var props = this.props;
@@ -84,8 +83,8 @@ class TableComponent extends React.Component {
         });
     }
     render() {
-        console.log(this.props, "props in table component")
-        console.log(this.state, "state in table component")
+      //  console.log(this.props, "props in table component")
+        //console.log(this.state, "state in table component")
 
         var rowComponents = this.displayRows(),
             headerComponent = this.displayHeaders();

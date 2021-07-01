@@ -53,7 +53,7 @@ const MapDialog = props => {
             <CssBaseline />
             <div >
                 <Container maxWidth="md" >
-                    <StateChart setTooltipContent={setContentD} setDistrictName={setDTName} selectedState={props.StateName} />
+                    <StateChart setTooltipContent={setContentD} setDistrictName={setDTName} selectedState={props.StateName} data={props.data}/>
                     <ReactTooltip>{contentD}</ReactTooltip>
                 </Container>
             </div>

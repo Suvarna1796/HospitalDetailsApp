@@ -11,9 +11,11 @@ import Tab from '@material-ui/core/Tab';
 import HeaderComponent from '../header';
 import FooterComponent from '../footer';
 import { Card } from 'reactstrap';
-import loginPublicUser, { loginGovernmentUser,loginHospitalUser } from '../../actions/signUp.actions';
+import loginPublicUser, { loginGovernmentUser, loginHospitalUser } from '../../actions/signUp.actions';
 import { connect } from 'react-redux';
 import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
+
+var userInfo, userId;
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -30,7 +32,8 @@ class LoginComponent extends React.Component {
             loginSelect: true,
             loginSelectValue: '',
             toggle: false,
-            modal: false
+            modal: false,
+            modalFlag: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleTabChange = this.handleTabChange.bind(this);
@@ -38,12 +41,36 @@ class LoginComponent extends React.Component {
         this.handleSelection = this.handleSelection.bind(this);
         this.handleLoginSelection = this.handleLoginSelection.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.togglebtn = this.togglebtn.bind(this);
+    }
+    togglebtn(value) {
+        //  event.preventDefault();
+        console.log(value)
+        if (value === 'yes') {
+            this.setState({ modalFlag: false });
+            userInfo = ''; userId = '';
+            localStorage.removeItem('userInfo');
+            localStorage.clear();
+            sessionStorage.removeItem('userID');
+            sessionStorage.clear();
+        }
+        if (value === 'no') {
+            // this.props.navigation.goBack()
+            console.log("111111111111111111", localStorage.getItem('user'))
+            if (localStorage.getItem('user') === 'public') {
+                this.props.history.push('/publicDashboard1')
+            } if (localStorage.getItem('user') === 'gvt') {
+                this.props.history.push('/governmentDashboard')
+            } if (localStorage.getItem('user') === 'hospital') {
+                this.props.history.push('/hospitalDashboard')
+            }
+        }
     }
     toggle() {
         this.setState({
             modal: false,
         });
-      }
+    }
     /*On select of login as user */
     handleLoginSelection(event) {
         if (event.target.value) {
@@ -102,6 +129,23 @@ class LoginComponent extends React.Component {
                 break;
         }
     }
+    componentWillMount() {
+        // will be true
+        userInfo = sessionStorage.getItem('userInfo');
+        userId = localStorage.getItem('userID');
+        console.log('userInfo: ', userInfo);
+        window.onpopstate = function () {
+            console.log("11111111111111111");
+            console.log(localStorage.getItem('user'));
+        };
+        // if (userId || userInfo) {
+        if (userInfo) {
+            return this.setState({ modalFlag: true })
+        } else {
+            return this.setState({ modalFlag: false })
+        }
+    }
+
     //submitting the form and api call
     handleLogin() {
         if (this.state.loginId === '' || this.state.loginPwd === '') {
@@ -124,7 +168,9 @@ class LoginComponent extends React.Component {
             this.setState({ errorLoginCaptcha: 'Required' });
         }
 
-        if (this.state.loginId !== undefined && this.state.loginPwd !== undefined && (this.state.captchaCode === this.state.inputCaptcha)) {
+        if (this.state.loginId !== undefined && this.state.loginPwd !== undefined
+            // && (this.state.captchaCode === this.state.inputCaptcha)
+        ) {
             console.log("in login btn");
             var data = {
                 "username": this.state.loginId,
@@ -157,7 +203,7 @@ class LoginComponent extends React.Component {
             value: tabvalue,
         });
     }
-    UNSAFE_componentWillReceiveProps (newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         if (newProps.userLogin.publicUserLogin) {
             if (newProps.userLogin.publicUserLogin.status === 200) {
                 this.props.history.push('/publicDashboard1')
@@ -185,7 +231,8 @@ class LoginComponent extends React.Component {
     }
     render() {
         const { value } = this.state;
-       
+
+        console.log(this.state.modalFlag, "modalFlag modal modalmodal modal modal modal")
         return (
             <div >
                 <HeaderComponent />
@@ -329,6 +376,22 @@ class LoginComponent extends React.Component {
                     <div className="d-flex justify-content-center">
                         <ButtonToolbar className="modal__footer">
                             <Button onClick={this.toggle}>OK</Button>
+                        </ButtonToolbar>
+                    </div>
+                </Modal>
+                <Modal isOpen={this.state.modalFlag} toggle={this.toggle} >
+                    <ModalBody></ModalBody>
+                    <ModalBody>
+                        <div className="d-flex justify-content-center">
+                            <p>Are you sure want to logout</p>
+                        </div>
+                    </ModalBody>
+                    <div className="d-flex justify-content-center">
+                        <ButtonToolbar className="modal__footer" >
+                            <Button onClick={() => this.togglebtn('yes')}>Yes</Button>
+                            {/* <Link to='/publicDashboard1' style={{ textDecoration: 'none' }}>  */}
+                            <Button onClick={() => this.togglebtn('no')}>No</Button>
+                            {/* </Link> */}
                         </ButtonToolbar>
                     </div>
                 </Modal>

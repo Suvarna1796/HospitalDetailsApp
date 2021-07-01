@@ -2,12 +2,16 @@ import axios from 'axios';
 import { BASE_API_URL } from '../configuration';
 var token;
 var userID;
+
+// let cookie = Cookies.load('access_token')
 //public user login
 export default function loginPublicUser(data) {
     console.log(data);
     return function action(dispatch) {
         const request = axios.post(`${BASE_API_URL}user/login`,
-            data
+            // const request = axios.post(`http://localhost:3001/user/login`,
+
+            data,
         );
         return request.then(
             response => dispatch(SuccessPublicLogin(response)),
@@ -18,8 +22,13 @@ export default function loginPublicUser(data) {
 const SuccessPublicLogin = (data) => {
     console.log(data, "public alogin api response");
     token = data.data.token;
+    console.log('token: ', token);
     userID = data.data.objectid;
-    localStorage.setItem('token',token)
+    var info = data.data.user.username;
+    // Cookies.save('access_token', token,  {withCredentials: true},{path:'/'})
+    sessionStorage.setItem('userInfo', info);
+
+    localStorage.setItem('token', token)
     localStorage.setItem('userID', userID)
     // token=data;
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
@@ -34,40 +43,6 @@ const ErrPublicLogin = (data) => {
     const PUBLIC_LOGIN = 'PUBLIC_LOGIN';
     return {
         type: PUBLIC_LOGIN,
-        data: data
-    }
-}
-
-
-//Government user login
-export function loginGovernmentUser(data) {
-    console.log(data);
-    return function action(dispatch) {
-        const request = axios.post(`https://covid-government-dashboard.herokuapp.com/user/login`,
-            data
-        );
-        return request.then(
-            response => dispatch(
-                SuccessGvtLogin(response)),
-            err => dispatch(ErrGvtLogin(err.response))
-        );
-    }
-}
-const SuccessGvtLogin = (data) => {
-    console.log(data, "login response sucess");
-    token = data;
-    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
-    return {
-        type: GOVERNMENT_LOGIN,
-        data: data
-    }
-}
-const ErrGvtLogin = (data) => {
-    console.log(data);
-    token = ''
-    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
-    return {
-        type: GOVERNMENT_LOGIN,
         data: data
     }
 }
@@ -191,21 +166,60 @@ const ErrHospitalSignUp = (data) => {
         data: data
     }
 }
-
+//axios.defaults.withCredentials = true;
 //public user details
+
+// const instance = axios.create({
+//     withCredentials: true
+// })
+// const axiosConfig = {
+//     headers: {
+//         'content-Type': 'application/json',
+//         "Accept": "/",
+//         "Cache-Control": "no-cache",
+//         "Cookie": document.cookie
+//     },
+//     credentials: "same-origin"
+// };
+// axios.defaults.withCredentials = true;
 export function publicUsergetList() {
     var publicUserid = localStorage.getItem('userID');
     var publicToken = localStorage.getItem('token');
+    console.log('publicToken: ', publicToken);
+    // sessionStorage.setItem('test', 1);
+    // var cookie_value = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJOb29iQ29kZXIiLCJzdWIiOiI2MGQyZDQyMDgzNDYzMDAwMTVjMmRjZjMiLCJpYXQiOjE2MjQ0NDAwMDksImV4cCI6MTYyNDQ0MzYwOX0.EWDkF5VHjXlrCgvH5v8y9fCNC0kIIvs2Sq8s41qq9tA; Path=/; SameSite=Strict'
+    // console.log('cookie_value: ', cookie_value);
+    // console.log('publicToken: ', publicToken);
+    //expressApp.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('GET','https://public12.herokuapp.com/stats/',true)
+    // xhr.withCredentials = true;
+    // xhr.send(null);
+    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJOb29iQ29kZXIiLCJzdWIiOiI2MGQyZDQyMDgzNDYzMDAwMTVjMmRjZjMiLCJpYXQiOjE2MjQ1MDkwNjMsImV4cCI6MTYyNDUxMjY2M30.59qZkOzgjDQnyvTpk6YF1reO4l1I-if7OdDrMzKltl0
+    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJOb29iQ29kZXIiLCJzdWIiOiI2MGQyZDQyMDgzNDYzMDAwMTVjMmRjZjMiLCJpYXQiOjE2MjQ1MDkwNjMsImV4cCI6MTYyNDUxMjY2M30.59qZkOzgjDQnyvTpk6YF1reO4l1I-if7OdDrMzKltl0
     var promise = new Promise((dispatch) => {
         axios
-            .get(`https://public12.herokuapp.com/stats/` + publicUserid,
+            .get(`https://public12.herokuapp.com/stats/`,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                        // 'Accept': 'application/json',
-                        'Authorization': publicToken,
+                        'Cookie': "access_token=" + publicToken + '; Path=/; SameSite=Strict'
                     }
                 }
+                //     // , headers: { 'Access-Control-Allow-Origin': ' http://localhost:3000/' }
+                // }
+                //cookie_value
+                // {
+                //     headers: {
+                //     }
+                // }
+                // {
+                // Cookie: "cookie1=value; cookie2=value; cookie3=value;",
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     // 'Accept': 'application/json',
+                //     'Authentication': publicToken,
+                // }
+                // }
             )
             .then(function (result) {
                 console.log(result);
@@ -216,7 +230,6 @@ export function publicUsergetList() {
                 dispatch(ErrPublicUser(error));
             });
     })
-    // console.log(promise);
     return promise
 }
 const SuccessPublicUser = (data) => {
@@ -236,34 +249,83 @@ const ErrPublicUser = (data) => {
     }
 }
 
-export function gvtUsergetList() {
-    console.log(token, "token")
-    var promise = new Promise((dispatch) => {
+
+
+
+
+
+//Government user login
+export function loginGovernmentUser(data) {
+    console.log(data);
+    return function action(dispatch) {
+        //const request = axios.post(`https://covid-government-dashboard.herokuapp.com/user/login`,
+        //const request = axios.post(`http://192.168.43.203:3000/user/login`,
+        const request = axios.post(`http://localhost:3000/user/login`,
+            //http://192.168.43.203:3006/
+            data
+        );
+        return request.then(
+            response => dispatch(
+                SuccessGvtLogin(response)),
+            err => dispatch(ErrGvtLogin(err.response))
+        );
+    }
+}
+const SuccessGvtLogin = (data) => {
+    console.log(data, "login response sucess");
+    token = data;
+    token = data.data.token.token;
+    console.log('token: ', token);
+    userID = data.data.objectid;
+    var info = data.data.user.username;
+    // Cookies.save('access_token', token,  {withCredentials: true},{path:'/'})
+    sessionStorage.setItem('userInfo', info);
+
+    localStorage.setItem('token', token)
+    localStorage.setItem('userID', userID)
+    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
+    return {
+        type: GOVERNMENT_LOGIN,
+        data: data
+    }
+}
+const ErrGvtLogin = (data) => {
+    console.log(data);
+    token = ''
+    const GOVERNMENT_LOGIN = 'GOVERNMENT_LOGIN';
+    return {
+        type: GOVERNMENT_LOGIN,
+        data: data
+    }
+}
+
+axios.defaults.withCredentials = true;
+export function gvtUsergetList(dispatch) {
+    var promise = new Promise((reject) => {
         axios
-            .get(`https://covid-government-dashboard.herokuapp.com/stats`
-                // { headers:  {
-                //     'Content-Type':'application/json',
-                //         'Authorization': token
-                //     }}
-            )
+            //.get(`https://covid-government-dashboard.herokuapp.com/stats`, {
+            //.get(`http://192.168.43.203:3000/stats`, {
+            .get(`http://localhost:3000/stats`, {
+                withCredentials: true,
+                headers: { 'Authentication': 'Bearer' + localStorage.getItem('token') }
+            })
             .then(function (result) {
-                console.log(result);
+                // resolve(result.data);
                 dispatch(SuccessGvtUser(result));
             })
             .catch(error => {
-                console.log(error);
-                dispatch(ErrGvtUser(error));
+                dispatch(ErrGvtUser(error))
             });
     })
-    // console.log(promise);
+    console.log(promise);
     return promise
 }
 const SuccessGvtUser = (data) => {
-    console.log(data);
+    // console.log(data);
     const GOVERNMENT_USER_DATA = 'GOVERNMENT_USER_DATA';
     return {
         type: GOVERNMENT_USER_DATA,
-        data: data
+        data: data.data
     }
 }
 const ErrGvtUser = (data) => {

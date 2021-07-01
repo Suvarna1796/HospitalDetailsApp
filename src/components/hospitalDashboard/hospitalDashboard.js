@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import '../../App.css';
 import DatePicker from 'react-date-picker';
 import FooterComponent from '../footer';
-import hspUsergetList,{hspUserBasicdetails} from '../../actions/hospital.actions';
+import hspUsergetList, { hspUserBasicdetails } from '../../actions/hospital.actions';
 import { connect } from 'react-redux';
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -53,6 +53,7 @@ class hopitalDefaultComponent extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(hspUsergetList);
+        localStorage.setItem('user', 'hospital')
     }
     /* Validating the form fields */
     validateAllFileds(fieldName, value) {
@@ -224,7 +225,7 @@ class hopitalDefaultComponent extends React.Component {
                             </Grid>
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
-                            <input type="text" name="hspOccupiedBeds" id="hspOccupiedBeds" defaultValue="10" className="form-control" onChange={this.handleChange} />
+                                <input type="text" name="hspOccupiedBeds" id="hspOccupiedBeds" defaultValue="10" className="form-control" onChange={this.handleChange} />
                                 {/* <select className="form-control" id="hspOccupiedBeds" name="hspOccupiedBeds" >
                                     <option value="1">General Beds - 08</option>
                                     <option value="2">Ventilator Beds</option>
@@ -240,7 +241,7 @@ class hopitalDefaultComponent extends React.Component {
                             </Grid>
                             <Grid item >&emsp;</Grid>
                             <Grid item xs={5}>
-                            <input type="text" name="hspEmptyBeds" id="hspEmptyBeds" defaultValue="1" className="form-control" onChange={this.handleChange} />
+                                <input type="text" name="hspEmptyBeds" id="hspEmptyBeds" defaultValue="1" className="form-control" onChange={this.handleChange} />
                                 {/* <select className="form-control" id="hspEmptyBeds" name="hspEmptyBeds" >
                                     <option value="1">General Beds - 11</option>
                                     <option value="2">Ventilator Beds</option>
