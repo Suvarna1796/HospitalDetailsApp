@@ -88,7 +88,9 @@ const StateChart = ({ setTooltipContent, setDistrictName, selectedState, data })
                         i.coordinates = v.coordinates;
                         v.bubblesize = i.Active;
                     }
+                    return null
                 })
+                return null
             })
         }
     }

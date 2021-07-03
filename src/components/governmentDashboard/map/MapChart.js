@@ -61,7 +61,9 @@ const MapChart = ({ setTooltipContent, setStateName, setShowDistrict, data }) =>
             i.coordinates = v.coordinates;
             v.bubblesize = i.Active;
           }
+          return null
         })
+        return null
       })
     }
   }

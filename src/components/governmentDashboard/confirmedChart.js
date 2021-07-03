@@ -2,24 +2,23 @@ import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import { AreaChart, Tooltip, Area, ResponsiveContainer } from 'recharts';
 // import TrendingDownIcon from 'mdi-react/TrendingDownIcon';
-
+var confirmedArr = []
 export default class Confirmed extends PureComponent {
   constructor() {
     super();
     this.state = {
       activeIndex: 0,
       confirmedTotal: 0,
-      confirmedArr:[]
     };
   }
 
   componentDidUpdate() {
     if (this.props.data) {
       if (this.props.data) {
-        this.state.confirmedArr = []
+        confirmedArr = []
         if (this.props.data.length > 0) {
           this.props.data.map((colData) => {
-           return this.state.confirmedArr.push({ name: colData.State, confirmed: colData.Confirmed })
+           return confirmedArr.push({ name: colData.State, confirmed: colData.Confirmed })
           })
         }
       }
@@ -41,7 +40,7 @@ export default class Confirmed extends PureComponent {
                 {this.state.confirmedTotal}
               </p>
               <ResponsiveContainer height={70} className="dashboard__chart-container">
-                <AreaChart data={this.state.confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
+                <AreaChart data={confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
                   {/* <Tooltip content={<CustomTooltip />} /> */}
                   <Tooltip />
                   <Area

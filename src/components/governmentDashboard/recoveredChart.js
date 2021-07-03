@@ -2,23 +2,22 @@ import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import { AreaChart, Tooltip, Area, ResponsiveContainer } from 'recharts';
 // import TrendingUpIcon from 'mdi-react/TrendingUpIcon';
-
+var confirmedArr = []
 export default class Recovered extends PureComponent {
   constructor() {
     super();
     this.state = {
       activeIndex: 0,
       recoveredTotal:0,
-      confirmedArr:[]
     };
   }
   componentDidUpdate() {
     if (this.props.data) {
       if (this.props.data) {
-        this.state.confirmedArr = []
+        confirmedArr = []
         if (this.props.data.length > 0) {
           this.props.data.map((colData) => {
-           return this.state.confirmedArr.push({ name: colData.State, recovered: colData.Recovered })
+           return confirmedArr.push({ name: colData.State, recovered: colData.Recovered })
           })
         }
       }
@@ -40,7 +39,7 @@ export default class Recovered extends PureComponent {
                 {this.state.recoveredTotal}
               </p>
               <ResponsiveContainer height={70} className="dashboard__chart-container">
-                <AreaChart data={this.state.confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
+                <AreaChart data={confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
                   <Tooltip />
                   <Area
                     name="recovered"

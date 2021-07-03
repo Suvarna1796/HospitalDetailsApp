@@ -321,10 +321,7 @@ class MapIndexComponent extends PureComponent {
 
                     </Row>
                 </Container>
-                {/* <Container style={{position:'relative'}}>
                 <FooterComponent />
-                </Container> */}
-
             </div>
         );
     }

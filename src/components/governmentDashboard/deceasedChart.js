@@ -2,24 +2,22 @@ import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import { AreaChart, Tooltip, Area, ResponsiveContainer } from 'recharts';
 // import TrendingUpIcon from 'mdi-react/TrendingUpIcon';
-import PropTypes from 'prop-types';
-
+var confirmedArr = []
 export default class Deceased extends PureComponent {
   constructor() {
     super();
     this.state = {
       activeIndex: 0,
       deathTotal:0,
-      confirmedArr:[]
     };
   }
   componentDidUpdate() {
     if (this.props.data) {
       if (this.props.data) {
-        this.state.confirmedArr = []
+        confirmedArr = []
         if (this.props.data.length > 0) {
           this.props.data.map((colData) => {
-           return this.state.confirmedArr.push({ name: colData.State, deceased: colData.Deaths })
+           return confirmedArr.push({ name: colData.State, deceased: colData.Deaths })
           })
         }
       }
@@ -42,7 +40,7 @@ export default class Deceased extends PureComponent {
                 {this.state.deathTotal}
               </p>
               <ResponsiveContainer height={70} className="dashboard__chart-container">
-                <AreaChart data={this.state.confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
+                <AreaChart data={confirmedArr} margin={{ top: 0, left: 0, bottom: 0 }}>
                   <Tooltip  />
                   <Area
                     name="deceased"

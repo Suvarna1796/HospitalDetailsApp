@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { BASE_API_URL } from '../configuration';
+
+import CookieService from "./cookieService";
 var token;
 var userID;
-
 // let cookie = Cookies.load('access_token')
 //public user login
 export default function loginPublicUser(data) {
     console.log(data);
     return function action(dispatch) {
-        const request = axios.post(`${BASE_API_URL}user/login`,
+        const request = axios.post(`http://public12.herokuapp.com/user/login`,
             // const request = axios.post(`http://localhost:3001/user/login`,
 
             data,
@@ -25,7 +26,12 @@ const SuccessPublicLogin = (data) => {
     console.log('token: ', token);
     userID = data.data.objectid;
     var info = data.data.user.username;
+    const options = { path: "/" };
+    CookieService.set("access_token", token, options);
+    //const options = { path: "/" };
     // Cookies.save('access_token', token,  {withCredentials: true},{path:'/'})
+    //CookieService.set("access_token", token, options);
+
     sessionStorage.setItem('userInfo', info);
 
     localStorage.setItem('token', token)
@@ -183,7 +189,6 @@ const ErrHospitalSignUp = (data) => {
 // };
 // axios.defaults.withCredentials = true;
 export function publicUsergetList() {
-    var publicUserid = localStorage.getItem('userID');
     var publicToken = localStorage.getItem('token');
     console.log('publicToken: ', publicToken);
     // sessionStorage.setItem('test', 1);
@@ -199,11 +204,12 @@ export function publicUsergetList() {
     //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJOb29iQ29kZXIiLCJzdWIiOiI2MGQyZDQyMDgzNDYzMDAwMTVjMmRjZjMiLCJpYXQiOjE2MjQ1MDkwNjMsImV4cCI6MTYyNDUxMjY2M30.59qZkOzgjDQnyvTpk6YF1reO4l1I-if7OdDrMzKltl0
     var promise = new Promise((dispatch) => {
         axios
-            .get(`https://public12.herokuapp.com/stats/`,
+            .get(`http://public12.herokuapp.com/stats/`,
                 {
-                    headers: {
-                        'Cookie': "access_token=" + publicToken + '; Path=/; SameSite=Strict'
-                    }
+                    // headers: {
+                    //     'Cookie': "access_token=" + publicToken + '; Path=/; SameSite=Strict'
+                    // }
+                    withCredentials: true
                 }
                 //     // , headers: { 'Access-Control-Allow-Origin': ' http://localhost:3000/' }
                 // }
@@ -276,6 +282,9 @@ const SuccessGvtLogin = (data) => {
     token = data;
     token = data.data.token.token;
     console.log('token: ', token);
+    const options = { path: "/" };
+    CookieService.set("access_token", token, options);
+    // Cookies.set('access_token', 'token');
     userID = data.data.objectid;
     var info = data.data.user.username;
     // Cookies.save('access_token', token,  {withCredentials: true},{path:'/'})
@@ -307,7 +316,6 @@ export function gvtUsergetList(dispatch) {
             //.get(`http://192.168.43.203:3000/stats`, {
             .get(`http://localhost:3000/stats`, {
                 withCredentials: true,
-                headers: { 'Authentication': 'Bearer' + localStorage.getItem('token') }
             })
             .then(function (result) {
                 // resolve(result.data);

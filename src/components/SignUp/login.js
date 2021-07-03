@@ -15,7 +15,7 @@ import loginPublicUser, { loginGovernmentUser, loginHospitalUser } from '../../a
 import { connect } from 'react-redux';
 import { Modal, ButtonToolbar, ModalBody } from 'reactstrap';
 
-var userInfo, userId;
+var userInfo;
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class LoginComponent extends React.Component {
         console.log(value)
         if (value === 'yes') {
             this.setState({ modalFlag: false });
-            userInfo = ''; userId = '';
+            userInfo = ''; 
             localStorage.removeItem('userInfo');
             localStorage.clear();
             sessionStorage.removeItem('userID');
@@ -132,13 +132,11 @@ class LoginComponent extends React.Component {
     componentWillMount() {
         // will be true
         userInfo = sessionStorage.getItem('userInfo');
-        userId = localStorage.getItem('userID');
         console.log('userInfo: ', userInfo);
         window.onpopstate = function () {
             console.log("11111111111111111");
             console.log(localStorage.getItem('user'));
         };
-        // if (userId || userInfo) {
         if (userInfo) {
             return this.setState({ modalFlag: true })
         } else {
@@ -169,7 +167,7 @@ class LoginComponent extends React.Component {
         }
 
         if (this.state.loginId !== undefined && this.state.loginPwd !== undefined
-            // && (this.state.captchaCode === this.state.inputCaptcha)
+             && (this.state.captchaCode === this.state.inputCaptcha)
         ) {
             console.log("in login btn");
             var data = {
